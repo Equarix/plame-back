@@ -130,17 +130,26 @@ model SituacionesEducativas {
   tpersonas            TPersona[]
 }
 
+model Persona {
+  personaId        Int        @id @default(autoincrement())
+  dni              String
+  fechaNacimiento  DateTime
+  sexo             String
+  estadoCivil      String
+  nacionalidad     String
+  primeraDireccion String
+  segundaDireccion String
+  telefono         String
+  email            String
+  estado           Boolean    @default(true)
+  createdAt        DateTime   @default(now())
+  tpersonas        TPersona[]
+}
+
 model TPersona {
   tPersonaId               Int                   @id @default(autoincrement())
-  dni                      String
-  fechaNacimiento          DateTime
-  sexo                     String
-  estadoCivil              String
-  nacionalidad             String
-  primeraDireccion         String
-  segundaDireccion         String
-  telefono                 String
-  email                    String
+  personaId                Int
+  persona                  Persona               @relation(fields: [personaId], references: [personaId])
   categoria                CategoriaPersona
   periodoInicio            DateTime
   periodoFin               DateTime?
