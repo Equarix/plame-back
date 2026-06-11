@@ -1,0 +1,290 @@
+{
+  "info": {
+    "_postman_id": "5a8f3c67-6d6b-4e75-9d6f-0dcb20a0d8c1",
+    "name": "api-plame - Auth",
+    "description": "Colección de Postman para el módulo de autenticación y gestión de usuarios.\n\nBase URL por defecto: http://localhost:3000/api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin\"\n}"
+            },
+            "description": "Inicia sesión y devuelve un JWT junto con el usuario autenticado."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "login"]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [],
+              "body": "{\n  \"message\": \"Request successful\",\n  \"status\": 200,\n  \"body\": {\n    \"token\": \"<jwt-token>\",\n    \"data\": {\n      \"userId\": 1,\n      \"username\": \"admin\",\n      \"name\": \"Admin\",\n      \"lastName\": \"Admin\",\n      \"role\": \"ADMIN\"\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"user1\",\n  \"password\": \"123456\",\n  \"role\": \"USER\",\n  \"name\": \"Juan\",\n  \"lastName\": \"Perez\"\n}"
+            },
+            "description": "Crea un usuario. Requiere rol ADMIN."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "register"]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"user1\",\n  \"password\": \"123456\",\n  \"role\": \"USER\",\n  \"name\": \"Juan\",\n  \"lastName\": \"Perez\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [],
+              "body": "{\n  \"message\": \"Request successful\",\n  \"status\": 200,\n  \"body\": {\n    \"userId\": 2,\n    \"username\": \"user1\",\n    \"password\": \"<hashed-password>\",\n    \"role\": \"USER\",\n    \"name\": \"Juan\",\n    \"lastName\": \"Perez\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/all-users?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "all-users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Devuelve usuarios paginados. Requiere rol ADMIN."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/all-users?page=1&limit=10",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "all-users"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [],
+              "body": "{\n  \"message\": \"Request successful\",\n  \"status\": 200,\n  \"body\": {\n    \"data\": [\n      {\n        \"userId\": 1,\n        \"username\": \"admin\",\n        \"name\": \"Admin\",\n        \"lastName\": \"Admin\",\n        \"role\": \"ADMIN\"\n      }\n    ],\n    \"metadata\": {\n      \"totalItems\": 1,\n      \"itemCount\": 1,\n      \"totalPages\": 1,\n      \"currentPage\": 1\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/delete-user/2",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "delete-user", "2"]
+            },
+            "description": "Marca un usuario como inactivo. Requiere rol ADMIN."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/delete-user/2",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "delete-user", "2"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [],
+              "body": "{\n  \"message\": \"Request successful\",\n  \"status\": 200,\n  \"body\": {\n    \"userId\": 2,\n    \"status\": false\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/edit/2",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "edit", "2"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"user1\",\n  \"password\": \"newpassword123\",\n  \"role\": \"USER\",\n  \"name\": \"Juan\",\n  \"lastName\": \"Perez\"\n}"
+            },
+            "description": "Actualiza un usuario por id. Requiere autenticación."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/edit/2",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "edit", "2"]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"user1\",\n  \"password\": \"newpassword123\",\n  \"role\": \"USER\",\n  \"name\": \"Juan\",\n  \"lastName\": \"Perez\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [],
+              "body": "{\n  \"message\": \"Request successful\",\n  \"status\": 200,\n  \"body\": {\n    \"userId\": 2,\n    \"username\": \"user1\",\n    \"password\": \"<hashed-password>\",\n    \"role\": \"USER\",\n    \"name\": \"Juan\",\n    \"lastName\": \"Perez\"\n  }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
