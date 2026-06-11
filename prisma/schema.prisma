@@ -22,3 +22,112 @@ model User {
   role     Role    @default(USER)
   status   Boolean @default(true)
 }
+
+model TEmpresa {
+  companyId Int    @id @default(autoincrement())
+  name      String
+  ruc       String
+  address   String
+}
+
+enum CategoriaPersona {
+  TRABAJADOR
+  PENSIONISTA
+  PERSONAL_FORMACION_LABORAL
+  PERSONAL_TERCERO
+}
+
+enum TipoTrabajador {
+  EJECUTIVO
+  OBRERO
+  EMPLEADO
+  TRABAJADOR_PORTUARIO
+  PRACTICANTE_SENATI
+  CONSTRUCTOR_CIVIL
+  PILOTO_COPILOTO
+  MARITMO_FLOVIAL_LACUSTRE
+  PERIODISTA
+  TRAB_INDUSTRIA_CUERO
+}
+
+enum RegimenLaboral {
+  D_LEG_728
+  MICROEMPRESA
+  AGRARIO
+  MINEROS
+  OTROS
+}
+
+enum TipoContrato {
+  PLAZO_INDETERMINADO
+  TIEMPO_PARCIAL
+  INICIO_INCREMEN_ACTIVIDAD
+  NECES_MERCADO
+  RECONV_EMPRESARIAL
+  OCASIONAL
+  SUPLENCIA
+  EMERGENCIA
+  OBRA_DETERMINADA
+  INTERMINENTE
+  OTRO
+}
+
+enum TipoPago {
+  EFECTIVO
+  DEPOSITO_BANCARIO
+  OTRO
+}
+
+enum PeriodoIngreso {
+  MENSUAL
+  QUINCENAL
+  SEMANAL
+  DIARIO
+  OTRO
+}
+
+model Ocupacion {
+  ocupacionId Int        @id @default(autoincrement())
+  name        String
+  tpersonas   TPersona[]
+}
+
+model Entidades {
+  entidadId Int        @id @default(autoincrement())
+  name      String
+  tpersonas TPersona[]
+}
+
+model TPersona {
+  tPersonaId               Int              @id @default(autoincrement())
+  dni                      String
+  fechaNacimiento          DateTime
+  sexo                     String
+  estadoCivil              String
+  nacionalidad             String
+  primeraDireccion         String
+  segundaDireccion         String
+  telefono                 String
+  email                    String
+  categoria                CategoriaPersona
+  periodoInicio            DateTime
+  periodoFin               DateTime?
+  motivoBaja               String?
+  tipoTrabajador           TipoTrabajador
+  fechaInicio              DateTime
+  motivoBajaTrabajador     String?
+  regimenLaboral           RegimenLaboral
+  otroRegimenLaboral       String?
+  ocupacionId              Int
+  ocupacion                Ocupacion        @relation(fields: [ocupacionId], references: [ocupacionId])
+  tipoContrato             TipoContrato
+  otroTipoContrato         String?
+  tipoPago                 TipoPago
+  otroTipoPago             String?
+  periodoIngreso           PeriodoIngreso
+  otroPeriodoIngreso       String?
+  entidadId                Int?
+  entidad                  Entidades?       @relation(fields: [entidadId], references: [entidadId])
+  cuentaBancaria           String?
+  montoRemuneracionInicial Float
+}
