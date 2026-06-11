@@ -125,6 +125,8 @@ model SituacionesEducativas {
   situacionEducativaId Int        @id @default(autoincrement())
   nombre               String
   requiereEstudios     Boolean
+  estado               Boolean    @default(true)
+  createdAt            DateTime   @default(now())
   tpersonas            TPersona[]
 }
 
