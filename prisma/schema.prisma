@@ -1,0 +1,23 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  userId   Int    @id @default(autoincrement())
+  name     String
+  lastName String
+  username String
+  password String
+  role     Role   @default(USER)
+}
