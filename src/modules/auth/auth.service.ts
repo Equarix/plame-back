@@ -66,6 +66,34 @@ export class AuthService implements OnModuleInit {
     };
   }
 
+  async loginAdmin(loginDto: LoginDto) {
+    const { username, password } = loginDto;
+    const user = await this.prisma.user.findFirst({
+      where: { username, status: true, role: 'ADMIN' },
+    });
+
+    if (!user) {
+      throw new NotFoundException('Invalid credentials');
+    }
+    const isPasswordValid = await compare(password, user.password);
+
+    if (!isPasswordValid) {
+      throw new NotFoundException('Invalid credentials');
+    }
+
+    const payload = {
+      userId: user.userId,
+      role: user.role,
+    };
+
+    const token = this.jwtService.sign(payload);
+
+    return {
+      token,
+      data: user,
+    };
+  }
+
   async register(registerDto: RegisterDto) {
     const { username, password, role, lastName, name } = registerDto;
 
@@ -157,5 +185,9 @@ export class AuthService implements OnModuleInit {
         name,
       },
     });
+  }
+
+  validateToken() {
+    return { valid: true };
   }
 }

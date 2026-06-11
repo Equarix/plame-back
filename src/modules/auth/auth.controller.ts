@@ -24,6 +24,11 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
+  @Post('login-admin')
+  async loginAdmin(@Body() loginDto: LoginDto) {
+    return this.authService.loginAdmin(loginDto);
+  }
+
   @Auth([Role.ADMIN])
   @Post('register')
   async register(@Body() registerDto: RegisterDto) {
@@ -46,5 +51,17 @@ export class AuthController {
   @Patch('edit/:id')
   async updateUser(@Param('id') id: number, @Body() updateData: RegisterDto) {
     return this.authService.updateUser(id, updateData);
+  }
+
+  @Auth()
+  @Get('validate')
+  validateToken() {
+    return this.authService.validateToken();
+  }
+
+  @Auth([Role.ADMIN])
+  @Get('validate/admin')
+  validateAdminToken() {
+    return this.authService.validateToken();
   }
 }

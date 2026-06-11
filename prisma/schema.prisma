@@ -24,10 +24,12 @@ model User {
 }
 
 model TEmpresa {
-  companyId Int    @id @default(autoincrement())
+  companyId Int        @id @default(autoincrement())
   name      String
   ruc       String
   address   String
+  status    Boolean    @default(true)
+  tpersonas TPersona[]
 }
 
 enum CategoriaPersona {
@@ -90,16 +92,44 @@ model Ocupacion {
   ocupacionId Int        @id @default(autoincrement())
   name        String
   tpersonas   TPersona[]
+  status      Boolean    @default(true)
+  createdAt   DateTime   @default(now())
 }
 
 model Entidades {
   entidadId Int        @id @default(autoincrement())
   name      String
+  status    Boolean    @default(true)
+  createdAt DateTime   @default(now())
   tpersonas TPersona[]
 }
 
+enum RegimenSalud {
+  ESSALUD_REGULAR
+  ESALUD_REGULAR_EPS
+  ESSALUD_AGRICOLA
+  SIS_MICROEMPRESA
+}
+
+enum RegimenPensionario {
+  SISTEMA_NACIONAL_PENSIONES
+  SPP_INTEGRA
+  SPP_HORIZONTE
+  SPP_PROFUNTO
+  SPP_PRIMA
+  SPP_HABITAT
+  SIN_REGIMEN_PENSIONARIO
+}
+
+model SituacionesEducativas {
+  situacionEducativaId Int        @id @default(autoincrement())
+  nombre               String
+  requiereEstudios     Boolean
+  tpersonas            TPersona[]
+}
+
 model TPersona {
-  tPersonaId               Int              @id @default(autoincrement())
+  tPersonaId               Int                   @id @default(autoincrement())
   dni                      String
   fechaNacimiento          DateTime
   sexo                     String
@@ -119,7 +149,7 @@ model TPersona {
   regimenLaboral           RegimenLaboral
   otroRegimenLaboral       String?
   ocupacionId              Int
-  ocupacion                Ocupacion        @relation(fields: [ocupacionId], references: [ocupacionId])
+  ocupacion                Ocupacion             @relation(fields: [ocupacionId], references: [ocupacionId])
   tipoContrato             TipoContrato
   otroTipoContrato         String?
   tipoPago                 TipoPago
@@ -127,7 +157,47 @@ model TPersona {
   periodoIngreso           PeriodoIngreso
   otroPeriodoIngreso       String?
   entidadId                Int?
-  entidad                  Entidades?       @relation(fields: [entidadId], references: [entidadId])
+  entidad                  Entidades?            @relation(fields: [entidadId], references: [entidadId])
   cuentaBancaria           String?
   montoRemuneracionInicial Float
+  regimenSalud             RegimenSalud
+  fechaInicioSalud         DateTime
+  fechaFinSalud            DateTime?
+  regimenPensionario       RegimenPensionario
+  fechaInicioPensionario   DateTime
+  fechaFinPensionario      DateTime?
+  CUSPP                    String?
+  sctr                     Boolean               @default(false)
+  situacionEducativaId     Int
+  situacionEducativa       SituacionesEducativas @relation(fields: [situacionEducativaId], references: [situacionEducativaId])
+  estudios                 Estudios[]
+  quintaCategoriaExonerada Boolean               @default(false)
+  evitaDobleImposicion     Boolean               @default(false)
+  tempresa                 TEmpresa?             @relation(fields: [tEmpresaCompanyId], references: [companyId])
+  tEmpresaCompanyId        Int?
+}
+
+enum FormacionCompleta {
+  SUPERIOR_COMPLETA
+  UNIVERSITARIA_COMPLETA
+}
+
+enum TipoEducacion {
+  INSTITUTO
+  UNIVERSIDAD
+  POLICIALES
+  NO_ESPECIFICA
+}
+
+model Estudios {
+  estudioId         Int               @id @default(autoincrement())
+  tPersonaId        Int
+  tPersona          TPersona          @relation(fields: [tPersonaId], references: [tPersonaId])
+  formacionCompleta FormacionCompleta
+  estudioPeru       Boolean
+  privado           Boolean
+  tipoEducacion     TipoEducacion
+  nombreInstitucion String
+  nombreCarrera     String
+  añoEgreso        Int
 }
