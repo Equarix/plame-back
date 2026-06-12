@@ -13,10 +13,12 @@ import {
   CategoriaPersona,
   FormacionCompleta,
   JornadaLaboral,
+  Pensiones,
   PeriodoIngreso,
   RegimenLaboral,
   RegimenPensionario,
   RegimenSalud,
+  Salud,
   TipoContrato,
   TipoEducacion,
   TipoPago,
@@ -223,4 +225,18 @@ export class CreateTPersonaDto {
 
   @IsBoolean()
   sindicalizado: boolean;
+
+  @IsEnum(Pensiones)
+  pension: Pensiones;
+
+  @IsEnum(Salud)
+  salud: Salud;
+
+  @IsDate()
+  @Type(() => Date)
+  fechaInicioSaludPension?: Date;
+
+  @IsDate()
+  @Type(() => Date)
+  fechaFinSaludPension?: Date;
 }

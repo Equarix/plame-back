@@ -265,6 +265,10 @@ model TPersona {
   fechaFinPensionario      DateTime?
   CUSPP                    String?
   sctr                     Boolean               @default(false)
+  pension                  Pensiones?
+  salud                    Salud?
+  fechaInicioSaludPension  DateTime?
+  fechaFinSaludPension     DateTime?
   situacionEducativaId     Int
   situacionEducativa       SituacionesEducativas @relation(fields: [situacionEducativaId], references: [situacionEducativaId])
   estudios                 Estudios[]
@@ -272,6 +276,16 @@ model TPersona {
   evitaDobleImposicion     Boolean               @default(false)
   tempresa                 TEmpresa?             @relation(fields: [tEmpresaCompanyId], references: [companyId])
   tEmpresaCompanyId        Int?
+}
+
+enum Pensiones {
+  ONP
+  PRIVADO
+}
+
+enum Salud {
+  ESSALUD
+  EPS
 }
 
 enum FormacionCompleta {
