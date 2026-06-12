@@ -6,9 +6,10 @@ import { OcupacionModule } from './modules/ocupacion/ocupacion.module';
 import { EntidadBancariaModule } from './modules/entidad-bancaria/entidad-bancaria.module';
 import { SituacionesAcademicasModule } from './modules/situaciones-academicas/situaciones-academicas.module';
 import { PersonaModule } from './modules/persona/persona.module';
+import { TPersonaModule } from './modules/t-persona/t-persona.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, TEmpresaModule, OcupacionModule, EntidadBancariaModule, SituacionesAcademicasModule, PersonaModule],
+  imports: [ConfigModule.forRoot(), AuthModule, TEmpresaModule, OcupacionModule, EntidadBancariaModule, SituacionesAcademicasModule, PersonaModule, TPersonaModule],
   controllers: [],
   providers: [],
 })
