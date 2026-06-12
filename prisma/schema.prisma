@@ -195,7 +195,6 @@ enum TipoZona {
 
 model Direccion {
   direccionId      Int          @id @default(autoincrement())
-  personaId        Int
   departamentoId   Int
   provinciaId      Int
   distritoId       Int
@@ -217,6 +216,12 @@ model Direccion {
   nombreZona       String
   referencia       String?
   refiereEssalud   Boolean      @default(false)
+}
+
+enum JornadaLaboral {
+  MAXIMA
+  ACUMULATIVA
+  NOCTURNO
 }
 
 model TPersona {
@@ -246,6 +251,12 @@ model TPersona {
   entidad                  Entidades?            @relation(fields: [entidadId], references: [entidadId])
   cuentaBancaria           String?
   montoRemuneracionInicial Float
+  codlocal                 String?
+  local                    String?
+  jornadaLaboral           JornadaLaboral?
+  situacionEspecial        String?
+  discapacidad             Boolean               @default(false)
+  sindicalizado            Boolean               @default(false)
   regimenSalud             RegimenSalud
   fechaInicioSalud         DateTime
   fechaFinSalud            DateTime?

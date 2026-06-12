@@ -12,6 +12,7 @@ import {
 import {
   CategoriaPersona,
   FormacionCompleta,
+  JornadaLaboral,
   PeriodoIngreso,
   RegimenLaboral,
   RegimenPensionario,
@@ -206,4 +207,20 @@ export class CreateTPersonaDto {
   @IsEmail()
   @IsNotEmpty()
   email: string;
+
+  @IsString()
+  codlocal: string;
+
+  @IsEnum(JornadaLaboral)
+  jornadaLaboral: JornadaLaboral;
+
+  @IsString()
+  @IsOptional()
+  situacionEspecial?: string;
+
+  @IsBoolean()
+  discapacidad: boolean;
+
+  @IsBoolean()
+  sindicalizado: boolean;
 }

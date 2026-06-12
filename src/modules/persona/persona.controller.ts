@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Query,
+  Put,
 } from '@nestjs/common';
 import { PersonaService } from './persona.service';
 import { CreatePersonaDto } from './dto/create-persona.dto';
@@ -14,6 +15,7 @@ import { UpdatePersonaDto } from './dto/update-persona.dto';
 import { Auth } from '../../common/decorator/auth/auth.decorator';
 import { Role } from '../../generated/prisma/enums';
 import { QueryPersonaDto } from './dto/query-persona.dto';
+import { CreateDireccionDto } from '../../common/dto/ubigeo.dto';
 
 @Controller('persona')
 export class PersonaController {
@@ -23,6 +25,24 @@ export class PersonaController {
   @Post()
   create(@Body() createPersonaDto: CreatePersonaDto) {
     return this.personaService.create(createPersonaDto);
+  }
+
+  @Auth()
+  @Post('add-address/:personaId')
+  addAddress(
+    @Param('personaId') personaId: string,
+    @Body() createDireccionDto: CreateDireccionDto,
+  ) {
+    return this.personaService.addAddress(+personaId, createDireccionDto);
+  }
+
+  @Auth()
+  @Put('edit-address/:addressId')
+  editAddress(
+    @Param('addressId') addressId: string,
+    @Body() updateDireccionDto: CreateDireccionDto,
+  ) {
+    return this.personaService.editAddress(+addressId, updateDireccionDto);
   }
 
   @Auth([Role.ADMIN])

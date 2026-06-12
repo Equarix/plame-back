@@ -3,6 +3,7 @@ import { CreatePersonaDto } from './dto/create-persona.dto';
 import { UpdatePersonaDto } from './dto/update-persona.dto';
 import { QueryPersonaDto } from './dto/query-persona.dto';
 import { PrismaService } from '../../common/prisma/prisma.service';
+import { CreateDireccionDto } from '../../common/dto/ubigeo.dto';
 
 @Injectable()
 export class PersonaService {
@@ -19,7 +20,7 @@ export class PersonaService {
     const newDireccion = await this.prisma.direccion.create({
       data: {
         ...rest,
-        personaId: persona.personaId,
+        personaPersonaId: persona.personaId,
         departamentoId,
         provinciaId,
         distritoId,
@@ -103,7 +104,7 @@ export class PersonaService {
 
       if (direccion) {
         const existingDireccion = await tx.direccion.findFirst({
-          where: { personaId: id },
+          where: { personaPersonaId: id },
         });
 
         if (existingDireccion) {
@@ -134,5 +135,55 @@ export class PersonaService {
       where: { personaId: id },
       data: { estado: false },
     });
+  }
+
+  async addAddress(personaId: number, createDireccionDto: CreateDireccionDto) {
+    const persona = await this.prisma.persona.findUnique({
+      where: { personaId },
+    });
+
+    if (!persona) {
+      throw new NotFoundException(`Persona with ID ${personaId} not found`);
+    }
+
+    const { departamentoId, provinciaId, distritoId, ...rest } =
+      createDireccionDto;
+
+    const newDireccion = await this.prisma.direccion.create({
+      data: {
+        ...rest,
+        personaPersonaId: persona.personaId,
+        departamentoId,
+        provinciaId,
+        distritoId,
+      },
+    });
+
+    return newDireccion;
+  }
+
+  async editAddress(addressId: number, updateDireccionDto: CreateDireccionDto) {
+    const existingDireccion = await this.prisma.direccion.findUnique({
+      where: { direccionId: addressId },
+    });
+
+    if (!existingDireccion) {
+      throw new NotFoundException(`Address with ID ${addressId} not found`);
+    }
+
+    const { departamentoId, provinciaId, distritoId, ...rest } =
+      updateDireccionDto;
+
+    const updatedDireccion = await this.prisma.direccion.update({
+      where: { direccionId: addressId },
+      data: {
+        ...rest,
+        departamentoId,
+        provinciaId,
+        distritoId,
+      },
+    });
+
+    return updatedDireccion;
   }
 }
