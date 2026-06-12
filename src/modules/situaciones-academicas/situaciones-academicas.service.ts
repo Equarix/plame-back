@@ -51,4 +51,10 @@ export class SituacionesAcademicasService {
       data: { estado: false },
     });
   }
+
+  async findPublic() {
+    return this.prisma.situacionesEducativas.findMany({
+      where: { estado: true },
+    });
+  }
 }

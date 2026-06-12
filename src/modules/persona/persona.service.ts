@@ -116,7 +116,6 @@ export class PersonaService {
           await tx.direccion.create({
             data: {
               ...direccion,
-              personaId: id,
               personaPersonaId: id,
             },
           });

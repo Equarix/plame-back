@@ -227,16 +227,20 @@ export class CreateTPersonaDto {
   sindicalizado: boolean;
 
   @IsEnum(Pensiones)
-  pension: Pensiones;
+  @IsOptional()
+  pension?: Pensiones;
 
   @IsEnum(Salud)
-  salud: Salud;
+  @IsOptional()
+  salud?: Salud;
 
   @IsDate()
+  @IsOptional()
   @Type(() => Date)
   fechaInicioSaludPension?: Date;
 
   @IsDate()
+  @IsOptional()
   @Type(() => Date)
   fechaFinSaludPension?: Date;
 }

@@ -52,4 +52,10 @@ export class SituacionesAcademicasController {
   remove(@Param('id') id: string) {
     return this.situacionesAcademicasService.remove(+id);
   }
+
+  @Auth()
+  @Get('public')
+  findPublic() {
+    return this.situacionesAcademicasService.findPublic();
+  }
 }
