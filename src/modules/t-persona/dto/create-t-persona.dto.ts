@@ -2,6 +2,7 @@ import {
   IsArray,
   IsBoolean,
   IsDate,
+  IsEmail,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -197,4 +198,12 @@ export class CreateTPersonaDto {
   @IsNotEmpty()
   @Type(() => Date)
   fechaInicio: Date;
+
+  @IsString()
+  @IsNotEmpty()
+  telefono: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 }

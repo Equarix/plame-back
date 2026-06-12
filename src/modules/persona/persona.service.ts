@@ -8,10 +8,28 @@ import { PrismaService } from '../../common/prisma/prisma.service';
 export class PersonaService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createPersonaDto: CreatePersonaDto) {
-    return this.prisma.persona.create({
-      data: createPersonaDto,
+  async create(createPersonaDto: CreatePersonaDto) {
+    const { direccion, ...personaData } = createPersonaDto;
+
+    const persona = await this.prisma.persona.create({
+      data: personaData,
     });
+
+    const { departamentoId, provinciaId, distritoId, ...rest } = direccion;
+    const newDireccion = await this.prisma.direccion.create({
+      data: {
+        ...rest,
+        personaId: persona.personaId,
+        departamentoId,
+        provinciaId,
+        distritoId,
+      },
+    });
+
+    return {
+      ...persona,
+      direcciones: [newDireccion],
+    };
   }
 
   async findAll(query: QueryPersonaDto) {
@@ -21,7 +39,6 @@ export class PersonaService {
       ? {
           dni: {
             contains: dni,
-            mode: 'insensitive',
           },
         }
       : {};
@@ -31,10 +48,18 @@ export class PersonaService {
         where,
         skip: (page - 1) * limit,
         take: limit,
+        include: {
+          direcciones: {
+            include: {
+              departamento: true,
+              provincia: true,
+              distrito: true,
+            },
+          },
+        },
       }),
       this.prisma.persona.count({ where }),
     ]);
-
     const metadata = {
       totalItems: count,
       itemCount: data.length,
@@ -48,6 +73,15 @@ export class PersonaService {
   async findOne(dni: string) {
     const persona = await this.prisma.persona.findFirst({
       where: { dni },
+      include: {
+        direcciones: {
+          include: {
+            departamento: true,
+            provincia: true,
+            distrito: true,
+          },
+        },
+      },
     });
     if (!persona) {
       throw new NotFoundException('Persona not found');
@@ -56,17 +90,49 @@ export class PersonaService {
     return persona;
   }
 
-  update(id: number, updatePersonaDto: UpdatePersonaDto) {
-    return this.prisma.persona.update({
-      where: { personaId: id },
-      data: updatePersonaDto,
+  async update(id: number, updatePersonaDto: UpdatePersonaDto) {
+    const { direccion, ...personaData } = updatePersonaDto;
+
+    return this.prisma.$transaction(async (tx) => {
+      await tx.persona.update({
+        where: { personaId: id },
+        data: {
+          ...personaData,
+        },
+      });
+
+      if (direccion) {
+        const existingDireccion = await tx.direccion.findFirst({
+          where: { personaId: id },
+        });
+
+        if (existingDireccion) {
+          await tx.direccion.update({
+            where: { direccionId: existingDireccion.direccionId },
+            data: direccion,
+          });
+        } else {
+          await tx.direccion.create({
+            data: {
+              ...direccion,
+              personaId: id,
+              personaPersonaId: id,
+            },
+          });
+        }
+      }
+
+      return {
+        ...personaData,
+        direccion,
+      };
     });
   }
 
   remove(id: number) {
     return this.prisma.persona.update({
       where: { personaId: id },
-      data: { status: false },
+      data: { estado: false },
     });
   }
 }

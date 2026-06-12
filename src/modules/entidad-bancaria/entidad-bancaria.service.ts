@@ -40,7 +40,6 @@ export class EntidadBancariaService {
         status: true,
         name: {
           contains: str,
-          mode: 'insensitive',
         },
       },
       take: 10,

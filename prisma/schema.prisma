@@ -131,19 +131,92 @@ model SituacionesEducativas {
 }
 
 model Persona {
-  personaId        Int        @id @default(autoincrement())
-  dni              String
-  fechaNacimiento  DateTime
-  sexo             String
-  estadoCivil      String
-  nacionalidad     String
-  primeraDireccion String
-  segundaDireccion String
-  telefono         String
-  email            String
-  estado           Boolean    @default(true)
-  createdAt        DateTime   @default(now())
-  tpersonas        TPersona[]
+  personaId       Int         @id @default(autoincrement())
+  dni             String
+  fechaNacimiento DateTime
+  nombres         String
+  apellidoPaterno String
+  apellidoMaterno String
+  sexo            String
+  estadoCivil     String
+  nacionalidad    String
+  estado          Boolean     @default(true)
+  createdAt       DateTime    @default(now())
+  tpersonas       TPersona[]
+  direcciones     Direccion[]
+}
+
+model Pais {
+  idPais        Int            @id @default(autoincrement())
+  pais          String
+  nacionalidad  String
+  departamentos Departamento[]
+}
+
+model Departamento {
+  idDepartamento Int         @id @default(autoincrement())
+  departamento   String
+  idPais         Int
+  pais           Pais        @relation(fields: [idPais], references: [idPais])
+  provincias     Provincia[]
+  direccions     Direccion[]
+}
+
+model Provincia {
+  idProvincia    Int          @id @default(autoincrement())
+  provincia      String
+  idDepartamento Int
+  departamento   Departamento @relation(fields: [idDepartamento], references: [idDepartamento])
+  distritos      Distrito[]
+  direccions     Direccion[]
+}
+
+model Distrito {
+  idDistrito  Int         @id @default(autoincrement())
+  distrito    String
+  idProvincia Int
+  provincia   Provincia   @relation(fields: [idProvincia], references: [idProvincia])
+  direccions  Direccion[]
+}
+
+enum TipoVia {
+  AVENIDA
+  CALLE
+  JIRON
+  PASAJE
+  OTRO
+}
+
+enum TipoZona {
+  URBANA
+  RURAL
+  OTRO
+}
+
+model Direccion {
+  direccionId      Int          @id @default(autoincrement())
+  personaId        Int
+  departamentoId   Int
+  provinciaId      Int
+  distritoId       Int
+  departamento     Departamento @relation(fields: [departamentoId], references: [idDepartamento])
+  provincia        Provincia    @relation(fields: [provinciaId], references: [idProvincia])
+  distrito         Distrito     @relation(fields: [distritoId], references: [idDistrito])
+  tipoVia          TipoVia
+  persona          Persona?     @relation(fields: [personaPersonaId], references: [personaId])
+  personaPersonaId Int?
+  nombreVia        String
+  numero           String
+  dpto             String?
+  interior         String?
+  manzana          String?
+  lote             String?
+  block            String?
+  etapa            String?
+  tipoZona         TipoZona
+  nombreZona       String
+  referencia       String?
+  refiereEssalud   Boolean      @default(false)
 }
 
 model TPersona {
@@ -151,6 +224,8 @@ model TPersona {
   personaId                Int
   persona                  Persona               @relation(fields: [personaId], references: [personaId])
   categoria                CategoriaPersona
+  telefono                 String
+  email                    String
   periodoInicio            DateTime
   periodoFin               DateTime?
   motivoBaja               String?

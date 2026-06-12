@@ -7,9 +7,10 @@ import { EntidadBancariaModule } from './modules/entidad-bancaria/entidad-bancar
 import { SituacionesAcademicasModule } from './modules/situaciones-academicas/situaciones-academicas.module';
 import { PersonaModule } from './modules/persona/persona.module';
 import { TPersonaModule } from './modules/t-persona/t-persona.module';
+import { UbigeoModule } from './modules/ubigeo/ubigeo.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, TEmpresaModule, OcupacionModule, EntidadBancariaModule, SituacionesAcademicasModule, PersonaModule, TPersonaModule],
+  imports: [ConfigModule.forRoot(), AuthModule, TEmpresaModule, OcupacionModule, EntidadBancariaModule, SituacionesAcademicasModule, PersonaModule, TPersonaModule, UbigeoModule],
   controllers: [],
   providers: [],
 })

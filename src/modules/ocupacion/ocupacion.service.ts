@@ -57,7 +57,6 @@ export class OcupacionService {
         status: true,
         name: {
           contains: str,
-          mode: 'insensitive',
         },
       },
       take: 10,

@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+import { IsDate, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { CreateDireccionDto } from '../../../common/dto/ubigeo.dto';
 
 export class CreatePersonaDto {
   @IsString()
@@ -23,16 +24,20 @@ export class CreatePersonaDto {
   @IsNotEmpty()
   nacionalidad: string;
 
-  @IsString()
+  @ValidateNested()
   @IsNotEmpty()
-  primeraDireccion: string;
+  @Type(() => CreateDireccionDto)
+  direccion: CreateDireccionDto;
 
   @IsString()
   @IsNotEmpty()
-  segundaDireccion: string;
+  nombres: string;
 
   @IsString()
   @IsNotEmpty()
-  telefono: string;
-  email: string;
+  apellidoPaterno: string;
+
+  @IsString()
+  @IsNotEmpty()
+  apellidoMaterno: string;
 }

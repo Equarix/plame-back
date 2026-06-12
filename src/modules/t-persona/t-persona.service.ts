@@ -96,11 +96,30 @@ export class TPersonaService {
       throw new NotFoundException(`TPersona with ID ${id} not found`);
     }
 
-    const { estudios, ...rest } = updateTPersonaDto;
+    const {
+      estudios,
+      personaId,
+      ocupacionId,
+      entidadId,
+      tEmpresaCompanyId,
+      situacionEducativaId,
+      ...rest
+    } = updateTPersonaDto;
 
     await this.prisma.tPersona.update({
       where: { tPersonaId: id },
-      data: rest,
+      data: {
+        ...rest,
+        ...(personaId && { persona: { connect: { personaId } } }),
+        ...(ocupacionId && { ocupacion: { connect: { ocupacionId } } }),
+        ...(entidadId && { entidad: { connect: { entidadId } } }),
+        ...(tEmpresaCompanyId && {
+          tempresa: { connect: { companyId: tEmpresaCompanyId } },
+        }),
+        ...(situacionEducativaId && {
+          situacionEducativa: { connect: { situacionEducativaId } },
+        }),
+      },
     });
 
     if (estudios) {
