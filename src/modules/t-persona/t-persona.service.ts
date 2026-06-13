@@ -68,6 +68,16 @@ export class TPersonaService {
           companyId: idEmpresa,
         },
       },
+      include: {
+        persona: {
+          include: {
+            direcciones: true,
+          },
+        },
+        ocupacion: true,
+        situacionEducativa: true,
+        estudios: true,
+      },
     });
   }
 
