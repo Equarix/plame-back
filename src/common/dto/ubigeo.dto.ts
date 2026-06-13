@@ -3,9 +3,6 @@ import { TipoVia, TipoZona } from '../../generated/prisma/enums';
 
 export class CreateDireccionDto {
   @IsNumber()
-  personaId: number;
-
-  @IsNumber()
   departamentoId: number;
 
   @IsNumber()

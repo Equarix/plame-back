@@ -17,6 +17,7 @@ export class PersonaService {
     });
 
     const { departamentoId, provinciaId, distritoId, ...rest } = direccion;
+
     const newDireccion = await this.prisma.direccion.create({
       data: {
         ...rest,
