@@ -11,6 +11,7 @@ import { TPersonaService } from './t-persona.service';
 import { CreateTPersonaDto } from './dto/create-t-persona.dto';
 import { UpdateTPersonaDto } from './dto/update-t-persona.dto';
 import { Auth } from '../../common/decorator/auth/auth.decorator';
+import { User } from '../../common/decorator/user/user.decorator';
 
 @Auth()
 @Controller('t-persona')
@@ -18,8 +19,11 @@ export class TPersonaController {
   constructor(private readonly tPersonaService: TPersonaService) {}
 
   @Post()
-  create(@Body() createTPersonaDto: CreateTPersonaDto) {
-    return this.tPersonaService.create(createTPersonaDto);
+  create(
+    @Body() createTPersonaDto: CreateTPersonaDto,
+    @User('userId') userId: number,
+  ) {
+    return this.tPersonaService.create(createTPersonaDto, userId);
   }
 
   @Get('company/:companyId')

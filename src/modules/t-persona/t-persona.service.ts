@@ -7,7 +7,7 @@ import { PrismaService } from '../../common/prisma/prisma.service';
 export class TPersonaService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createTPersonaDto: CreateTPersonaDto) {
+  async create(createTPersonaDto: CreateTPersonaDto, userId: number) {
     const {
       personaId,
       ocupacionId,
@@ -35,6 +35,9 @@ export class TPersonaService {
         },
         situacionEducativa: {
           connect: { situacionEducativaId },
+        },
+        user: {
+          connect: { userId },
         },
       },
     });

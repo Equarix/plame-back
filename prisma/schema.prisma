@@ -14,13 +14,14 @@ enum Role {
 }
 
 model User {
-  userId   Int     @id @default(autoincrement())
-  name     String
-  lastName String
-  username String
-  password String
-  role     Role    @default(USER)
-  status   Boolean @default(true)
+  userId    Int        @id @default(autoincrement())
+  name      String
+  lastName  String
+  username  String
+  password  String
+  role      Role       @default(USER)
+  status    Boolean    @default(true)
+  tpersonas TPersona[]
 }
 
 model TEmpresa {
@@ -276,6 +277,10 @@ model TPersona {
   evitaDobleImposicion     Boolean               @default(false)
   tempresa                 TEmpresa?             @relation(fields: [tEmpresaCompanyId], references: [companyId])
   tEmpresaCompanyId        Int?
+  createAt                 DateTime              @default(now())
+  userId                   Int
+  user                     User                  @relation(fields: [userId], references: [userId])
+  fechaIngreso             DateTime
 }
 
 enum Pensiones {
