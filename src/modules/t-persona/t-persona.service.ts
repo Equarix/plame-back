@@ -142,9 +142,25 @@ export class TPersonaService {
 
       await Promise.all(
         estudios.map(async (estudio) => {
+          const {
+            formacionCompleta,
+            estudioPeru,
+            privado,
+            tipoEducacion,
+            nombreInstitucion,
+            nombreCarrera,
+            añoEgreso,
+          } = estudio;
+
           return await this.prisma.estudios.create({
             data: {
-              ...estudio,
+              formacionCompleta,
+              estudioPeru,
+              privado,
+              tipoEducacion,
+              nombreInstitucion,
+              nombreCarrera,
+              añoEgreso,
               tPersona: {
                 connect: { tPersonaId: id },
               },
