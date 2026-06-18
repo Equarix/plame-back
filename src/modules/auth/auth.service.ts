@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../common/prisma/prisma.service';
 import { LoginDto } from './dto/login.dto';
 import { compare, hash } from 'bcryptjs';
@@ -8,34 +8,11 @@ import { QueryDto } from '../../common/dto/query.dto';
 import { Metadata } from '../../common/interface/types';
 
 @Injectable()
-export class AuthService implements OnModuleInit {
+export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
   ) {}
-
-  async onModuleInit() {
-    const findUser = await this.prisma.user.findFirst({
-      where: {
-        username: 'admin',
-      },
-    });
-
-    if (!findUser) {
-      const passwordHash = await hash('admin', 10);
-
-      await this.prisma.user.create({
-        data: {
-          username: 'admin',
-          password: passwordHash,
-          lastName: 'Admin',
-          role: 'ADMIN',
-          name: 'Admin',
-        },
-      });
-      console.log('Admin user created:');
-    }
-  }
 
   async login(loginDto: LoginDto) {
     const { username, password } = loginDto;
