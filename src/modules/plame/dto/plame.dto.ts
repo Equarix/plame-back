@@ -97,4 +97,64 @@ export class UpdatePlameDeclaracionDto {
   @IsOptional()
   @IsNumber()
   totalNetoAPagar?: number;
+
+  @IsOptional()
+  @IsNumber()
+  creditoEps602?: number;
+
+  @IsOptional()
+  @IsNumber()
+  creditoEps612?: number;
+
+  @IsOptional()
+  @IsNumber()
+  otrasDeducciones605?: number;
+
+  @IsOptional()
+  @IsNumber()
+  pagosPreviosSNP?: number;
+
+  @IsOptional()
+  @IsNumber()
+  pagosPreviosEsSalud?: number;
+
+  @IsOptional()
+  @IsNumber()
+  pagosPreviosRenta?: number;
+
+  @IsOptional()
+  @IsNumber()
+  interesSNP?: number;
+
+  @IsOptional()
+  @IsNumber()
+  interesEsSalud?: number;
+
+  @IsOptional()
+  @IsNumber()
+  interesRenta?: number;
+
+  @IsOptional()
+  @IsNumber()
+  importePagarSNP?: number;
+
+  @IsOptional()
+  @IsNumber()
+  importePagarEsSalud?: number;
+
+  @IsOptional()
+  @IsNumber()
+  importePagarRenta?: number;
+
+  @IsOptional()
+  @IsString()
+  formaPago?: string;
+
+  @IsOptional()
+  @IsString()
+  banco?: string;
+
+  @IsOptional()
+  @IsString()
+  numeroCheque?: string;
 }

@@ -330,6 +330,21 @@ model PlameDeclaracion {
   fechaPresentacion  DateTime?
   estado             String                @default("En Proceso")
   totalNetoAPagar    Float                 @default(0.0)
+  creditoEps602      Float                 @default(0.0)
+  creditoEps612      Float                 @default(0.0)
+  otrasDeducciones605 Float                @default(0.0)
+  pagosPreviosSNP    Float                 @default(0.0)
+  pagosPreviosEsSalud Float                @default(0.0)
+  pagosPreviosRenta  Float                 @default(0.0)
+  interesSNP         Float                 @default(0.0)
+  interesEsSalud     Float                 @default(0.0)
+  interesRenta       Float                 @default(0.0)
+  importePagarSNP    Float                 @default(0.0)
+  importePagarEsSalud Float                @default(0.0)
+  importePagarRenta  Float                 @default(0.0)
+  formaPago          String?
+  banco              String?
+  numeroCheque       String?
   createdAt          DateTime              @default(now())
   detalles           PlameDetallePersona[]
 }
