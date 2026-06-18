@@ -25,12 +25,13 @@ model User {
 }
 
 model TEmpresa {
-  companyId Int        @id @default(autoincrement())
-  name      String
-  ruc       String
-  address   String
-  status    Boolean    @default(true)
-  tpersonas TPersona[]
+  companyId          Int                @id @default(autoincrement())
+  name               String
+  ruc                String
+  address            String
+  status             Boolean            @default(true)
+  tpersonas          TPersona[]
+  plameDeclaraciones PlameDeclaracion[]
 }
 
 enum CategoriaPersona {
@@ -281,6 +282,7 @@ model TPersona {
   userId                   Int
   user                     User                  @relation(fields: [userId], references: [userId])
   fechaIngreso             DateTime
+  plameDetalles            PlameDetallePersona[]
 }
 
 enum Pensiones {
@@ -316,4 +318,64 @@ model Estudios {
   nombreInstitucion String
   nombreCarrera     String
   añoEgreso        Int
+}
+
+model PlameDeclaracion {
+  plameDeclaracionId Int                   @id @default(autoincrement())
+  companyId          Int
+  tempresa           TEmpresa              @relation(fields: [companyId], references: [companyId])
+  periodo            String
+  sustitutoria       Boolean               @default(false)
+  numeroOrden        String?
+  fechaPresentacion  DateTime?
+  estado             String                @default("En Proceso")
+  totalNetoAPagar    Float                 @default(0.0)
+  createdAt          DateTime              @default(now())
+  detalles           PlameDetallePersona[]
+}
+
+model PlameDetallePersona {
+  detalleId          Int                     @id @default(autoincrement())
+  plameDeclaracionId Int
+  plameDeclaracion   PlameDeclaracion        @relation(fields: [plameDeclaracionId], references: [plameDeclaracionId], onDelete: Cascade)
+  tPersonaId         Int
+  tPersona           TPersona                @relation(fields: [tPersonaId], references: [tPersonaId])
+  diasLaborados      Int                     @default(30)
+  diasSubsidiados    Int                     @default(0)
+  diasNoLaborados    Int                     @default(0)
+  horasOrdinarias    String                  @default("00:00")
+  horasSobretiempo   String                  @default("00:00")
+  ingresos           PlameDetalleIngreso[]
+  descuentos         PlameDetalleDescuento[]
+  tributos           PlameDetalleTributo[]
+  createdAt          DateTime                @default(now())
+}
+
+model PlameDetalleIngreso {
+  ingresoId Int                 @id @default(autoincrement())
+  detalleId Int
+  detalle   PlameDetallePersona @relation(fields: [detalleId], references: [detalleId], onDelete: Cascade)
+  code      String
+  name      String
+  devengado Float               @default(0.0)
+  pagado    Float               @default(0.0)
+}
+
+model PlameDetalleDescuento {
+  descuentoId Int                 @id @default(autoincrement())
+  detalleId   Int
+  detalle     PlameDetallePersona @relation(fields: [detalleId], references: [detalleId], onDelete: Cascade)
+  code        String
+  name        String
+  monto       Float               @default(0.0)
+}
+
+model PlameDetalleTributo {
+  tributoId Int                 @id @default(autoincrement())
+  detalleId Int
+  detalle   PlameDetallePersona @relation(fields: [detalleId], references: [detalleId], onDelete: Cascade)
+  code      String
+  name      String
+  base      Float               @default(0.0)
+  monto     Float               @default(0.0)
 }
