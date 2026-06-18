@@ -85,7 +85,11 @@ export class TPersonaService {
     const tPersona = await this.prisma.tPersona.findUnique({
       where: { tPersonaId: id },
       include: {
-        persona: true,
+        persona: {
+          include: {
+            direcciones: true,
+          },
+        },
         ocupacion: true,
         entidad: true,
         situacionEducativa: true,
