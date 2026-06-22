@@ -74,11 +74,82 @@ export class PlameService {
       },
     });
 
+    const companyConceptos = await this.prisma.tEmpresaConceptos.findMany({
+      where: { tEmpresaCompanyId: companyId },
+      include: { concepto: true },
+    });
+
     for (const tp of tPersonas) {
       const exists = declaracion.detalles.some(d => d.tPersonaId === tp.tPersonaId);
       if (!exists) {
-        const essaludBase = tp.montoRemuneracionInicial < 1130 ? 1130 : tp.montoRemuneracionInicial;
-        const essaludMonto = Number((essaludBase * 0.09).toFixed(2));
+        // dynamic ingresos
+        const dynamicIngresos = companyConceptos
+          .filter(cc => cc.concepto.tipo === 'INGRESO')
+          .map(cc => {
+            const isBaseSalary = cc.concepto.codigo === '0121';
+            return {
+              code: cc.concepto.codigo,
+              name: cc.concepto.nombre,
+              devengado: isBaseSalary ? tp.montoRemuneracionInicial : 0.0,
+              pagado: isBaseSalary ? tp.montoRemuneracionInicial : 0.0,
+            };
+          });
+
+        const ingresosToCreate = dynamicIngresos.length > 0 ? dynamicIngresos : [
+          { code: '0105', name: 'TRABAJO SOBRETIEMPO (H. EXTRAS 25%)', devengado: 0, pagado: 0 },
+          { code: '0106', name: 'TRABAJO SOBRETIEMPO (H. EXTRAS 35%)', devengado: 0, pagado: 0 },
+          { code: '0107', name: 'TRABAJO EN FERIADO O DÍA DESCANSO', devengado: 0, pagado: 0 },
+          { code: '0118', name: 'REMUNERACIÓN VACACIONAL', devengado: 0, pagado: 0 },
+          {
+            code: '0121',
+            name: 'REMUNERACION O JORNAL BASICO',
+            devengado: tp.montoRemuneracionInicial,
+            pagado: tp.montoRemuneracionInicial,
+          },
+          { code: '0122', name: 'REMUNERACIÓN PERMANENTE', devengado: 0, pagado: 0 },
+          { code: '0201', name: 'ASIGNACIÓN FAMILIAR', devengado: 0, pagado: 0 },
+          { code: '0311', name: 'BONIFICACION UNIFICADA DE CONSTRUCC', devengado: 0, pagado: 0 },
+          { code: '0406', name: 'GRATIF. F.PATRIAS NAVIDAD LEY 29351 Y 30334', devengado: 0, pagado: 0 },
+          { code: '0407', name: 'GRATIFIC. PROPORCIONAL - LEY 29351 Y 30334', devengado: 0, pagado: 0 },
+          { code: '0504', name: 'INDEMNIZACIÓN VACACIONES NO GOZADAS', devengado: 0, pagado: 0 },
+          { code: '0904', name: 'COMPENSACIÓN TIEMPO DE SERVICIOS', devengado: 0, pagado: 0 },
+        ];
+
+        // dynamic descuentos
+        const dynamicDescuentos = companyConceptos
+          .filter(cc => cc.concepto.tipo === 'DESCUENTO')
+          .map(cc => ({
+            code: cc.concepto.codigo,
+            name: cc.concepto.nombre,
+            monto: 0.0,
+          }));
+
+        // dynamic tributos
+        const dynamicTributos = companyConceptos
+          .filter(cc => cc.concepto.tipo === 'TRIBUTO')
+          .map(cc => {
+            const isEssalud = cc.concepto.codigo === '0804';
+            const base = isEssalud
+              ? (tp.montoRemuneracionInicial < 1130 ? 1130 : tp.montoRemuneracionInicial)
+              : tp.montoRemuneracionInicial;
+            const pct = cc.concepto.porcentaje || 0;
+            const monto = pct > 0 ? Number((base * (pct / 100)).toFixed(2)) : 0;
+            return {
+              code: cc.concepto.codigo,
+              name: cc.concepto.nombre,
+              base: pct > 0 ? base : 0,
+              monto,
+            };
+          });
+
+        const tributosToCreate = dynamicTributos.length > 0 ? dynamicTributos : [
+          {
+            code: '0804',
+            name: 'ESSALUD(REGULAR CBSSP AGRAR/AC)TRAB',
+            base: tp.montoRemuneracionInicial < 1130 ? 1130 : tp.montoRemuneracionInicial,
+            monto: Number(((tp.montoRemuneracionInicial < 1130 ? 1130 : tp.montoRemuneracionInicial) * 0.09).toFixed(2)),
+          },
+        ];
 
         await this.prisma.plameDetallePersona.create({
           data: {
@@ -90,38 +161,13 @@ export class PlameService {
             horasOrdinarias: '240:00',
             horasSobretiempo: '00:00',
             ingresos: {
-              create: [
-                { code: '0105', name: 'TRABAJO SOBRETIEMPO (H. EXTRAS 25%)', devengado: 0, pagado: 0 },
-                { code: '0106', name: 'TRABAJO SOBRETIEMPO (H. EXTRAS 35%)', devengado: 0, pagado: 0 },
-                { code: '0107', name: 'TRABAJO EN FERIADO O DÍA DESCANSO', devengado: 0, pagado: 0 },
-                { code: '0118', name: 'REMUNERACIÓN VACACIONAL', devengado: 0, pagado: 0 },
-                {
-                  code: '0121',
-                  name: 'REMUNERACION O JORNAL BASICO',
-                  devengado: tp.montoRemuneracionInicial,
-                  pagado: tp.montoRemuneracionInicial,
-                },
-                { code: '0122', name: 'REMUNERACIÓN PERMANENTE', devengado: 0, pagado: 0 },
-                { code: '0201', name: 'ASIGNACIÓN FAMILIAR', devengado: 0, pagado: 0 },
-                { code: '0311', name: 'BONIFICACION UNIFICADA DE CONSTRUCC', devengado: 0, pagado: 0 },
-                { code: '0406', name: 'GRATIF. F.PATRIAS NAVIDAD LEY 29351 Y 30334', devengado: 0, pagado: 0 },
-                { code: '0407', name: 'GRATIFIC. PROPORCIONAL - LEY 29351 Y 30334', devengado: 0, pagado: 0 },
-                { code: '0504', name: 'INDEMNIZACIÓN VACACIONES NO GOZADAS', devengado: 0, pagado: 0 },
-                { code: '0904', name: 'COMPENSACIÓN TIEMPO DE SERVICIOS', devengado: 0, pagado: 0 },
-              ],
+              create: ingresosToCreate,
             },
             descuentos: {
-              create: [],
+              create: dynamicDescuentos,
             },
             tributos: {
-              create: [
-                {
-                  code: '0804',
-                  name: 'ESSALUD(REGULAR CBSSP AGRAR/AC)TRAB',
-                  base: essaludBase,
-                  monto: essaludMonto,
-                },
-              ],
+              create: tributosToCreate,
             },
           },
         });
