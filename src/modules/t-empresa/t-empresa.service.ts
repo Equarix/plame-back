@@ -14,6 +14,13 @@ export class TEmpresaService {
       this.prisma.tEmpresa.findMany({
         skip: (page - 1) * limit,
         take: limit,
+        include: {
+          tempresaConceptos: {
+            include: {
+              concepto: true,
+            },
+          },
+        },
       }),
       this.prisma.tEmpresa.count(),
     ]);
@@ -58,6 +65,13 @@ export class TEmpresaService {
   async getPublicTEmpresa() {
     return this.prisma.tEmpresa.findMany({
       where: { status: true },
+      include: {
+        tempresaConceptos: {
+          include: {
+            concepto: true,
+          },
+        },
+      },
     });
   }
 }

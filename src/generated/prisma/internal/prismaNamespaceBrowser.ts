@@ -53,6 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   TEmpresa: 'TEmpresa',
+  TEmpresaConceptos: 'TEmpresaConceptos',
+  TConceptos: 'TConceptos',
   Ocupacion: 'Ocupacion',
   Entidades: 'Entidades',
   SituacionesEducativas: 'SituacionesEducativas',
@@ -106,6 +108,29 @@ export const TEmpresaScalarFieldEnum = {
 } as const
 
 export type TEmpresaScalarFieldEnum = (typeof TEmpresaScalarFieldEnum)[keyof typeof TEmpresaScalarFieldEnum]
+
+
+export const TEmpresaConceptosScalarFieldEnum = {
+  id: 'id',
+  tEmpresaCompanyId: 'tEmpresaCompanyId',
+  conceptoId: 'conceptoId'
+} as const
+
+export type TEmpresaConceptosScalarFieldEnum = (typeof TEmpresaConceptosScalarFieldEnum)[keyof typeof TEmpresaConceptosScalarFieldEnum]
+
+
+export const TConceptosScalarFieldEnum = {
+  conceptoId: 'conceptoId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  tipo: 'tipo',
+  subTipo: 'subTipo',
+  porcentaje: 'porcentaje',
+  estado: 'estado',
+  createdAt: 'createdAt'
+} as const
+
+export type TConceptosScalarFieldEnum = (typeof TConceptosScalarFieldEnum)[keyof typeof TConceptosScalarFieldEnum]
 
 
 export const OcupacionScalarFieldEnum = {

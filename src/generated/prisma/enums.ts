@@ -17,6 +17,23 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
+export const TipoConcepto = {
+  INGRESO: 'INGRESO',
+  DESCUENTO: 'DESCUENTO',
+  TRIBUTO: 'TRIBUTO'
+} as const
+
+export type TipoConcepto = (typeof TipoConcepto)[keyof typeof TipoConcepto]
+
+
+export const SubConcepto = {
+  Trabajador: 'Trabajador',
+  Empleador: 'Empleador'
+} as const
+
+export type SubConcepto = (typeof SubConcepto)[keyof typeof SubConcepto]
+
+
 export const CategoriaPersona = {
   TRABAJADOR: 'TRABAJADOR',
   PENSIONISTA: 'PENSIONISTA',

@@ -28,6 +28,16 @@ export type User = Prisma.UserModel
  */
 export type TEmpresa = Prisma.TEmpresaModel
 /**
+ * Model TEmpresaConceptos
+ * 
+ */
+export type TEmpresaConceptos = Prisma.TEmpresaConceptosModel
+/**
+ * Model TConceptos
+ * 
+ */
+export type TConceptos = Prisma.TConceptosModel
+/**
  * Model Ocupacion
  * 
  */

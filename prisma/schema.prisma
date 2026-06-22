@@ -25,13 +25,45 @@ model User {
 }
 
 model TEmpresa {
-  companyId          Int                @id @default(autoincrement())
+  companyId          Int                 @id @default(autoincrement())
   name               String
   ruc                String
   address            String
-  status             Boolean            @default(true)
+  status             Boolean             @default(true)
   tpersonas          TPersona[]
   plameDeclaraciones PlameDeclaracion[]
+  tempresaConceptos  TEmpresaConceptos[]
+}
+
+model TEmpresaConceptos {
+  id                Int        @id @default(autoincrement())
+  tEmpresaCompanyId Int
+  tEmpresa          TEmpresa   @relation(fields: [tEmpresaCompanyId], references: [companyId])
+  conceptoId        Int
+  concepto          TConceptos @relation(fields: [conceptoId], references: [conceptoId])
+}
+
+enum TipoConcepto {
+  INGRESO
+  DESCUENTO
+  TRIBUTO
+}
+
+enum SubConcepto {
+  Trabajador
+  Empleador
+}
+
+model TConceptos {
+  conceptoId        Int                 @id @default(autoincrement())
+  codigo            String
+  nombre            String
+  tipo              TipoConcepto
+  subTipo           SubConcepto?
+  porcentaje        Float?
+  estado            Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  tempresaConceptos TEmpresaConceptos[]
 }
 
 enum CategoriaPersona {
@@ -321,32 +353,32 @@ model Estudios {
 }
 
 model PlameDeclaracion {
-  plameDeclaracionId Int                   @id @default(autoincrement())
-  companyId          Int
-  tempresa           TEmpresa              @relation(fields: [companyId], references: [companyId])
-  periodo            String
-  sustitutoria       Boolean               @default(false)
-  numeroOrden        String?
-  fechaPresentacion  DateTime?
-  estado             String                @default("En Proceso")
-  totalNetoAPagar    Float                 @default(0.0)
-  creditoEps602      Float                 @default(0.0)
-  creditoEps612      Float                 @default(0.0)
-  otrasDeducciones605 Float                @default(0.0)
-  pagosPreviosSNP    Float                 @default(0.0)
-  pagosPreviosEsSalud Float                @default(0.0)
-  pagosPreviosRenta  Float                 @default(0.0)
-  interesSNP         Float                 @default(0.0)
-  interesEsSalud     Float                 @default(0.0)
-  interesRenta       Float                 @default(0.0)
-  importePagarSNP    Float                 @default(0.0)
-  importePagarEsSalud Float                @default(0.0)
-  importePagarRenta  Float                 @default(0.0)
-  formaPago          String?
-  banco              String?
-  numeroCheque       String?
-  createdAt          DateTime              @default(now())
-  detalles           PlameDetallePersona[]
+  plameDeclaracionId  Int                   @id @default(autoincrement())
+  companyId           Int
+  tempresa            TEmpresa              @relation(fields: [companyId], references: [companyId])
+  periodo             String
+  sustitutoria        Boolean               @default(false)
+  numeroOrden         String?
+  fechaPresentacion   DateTime?
+  estado              String                @default("En Proceso")
+  totalNetoAPagar     Float                 @default(0.0)
+  creditoEps602       Float                 @default(0.0)
+  creditoEps612       Float                 @default(0.0)
+  otrasDeducciones605 Float                 @default(0.0)
+  pagosPreviosSNP     Float                 @default(0.0)
+  pagosPreviosEsSalud Float                 @default(0.0)
+  pagosPreviosRenta   Float                 @default(0.0)
+  interesSNP          Float                 @default(0.0)
+  interesEsSalud      Float                 @default(0.0)
+  interesRenta        Float                 @default(0.0)
+  importePagarSNP     Float                 @default(0.0)
+  importePagarEsSalud Float                 @default(0.0)
+  importePagarRenta   Float                 @default(0.0)
+  formaPago           String?
+  banco               String?
+  numeroCheque        String?
+  createdAt           DateTime              @default(now())
+  detalles            PlameDetallePersona[]
 }
 
 model PlameDetallePersona {
