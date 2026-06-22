@@ -10,6 +10,8 @@
  */
 export type * from './models/User.js'
 export type * from './models/TEmpresa.js'
+export type * from './models/TEmpresaConceptos.js'
+export type * from './models/TConceptos.js'
 export type * from './models/Ocupacion.js'
 export type * from './models/Entidades.js'
 export type * from './models/SituacionesEducativas.js'

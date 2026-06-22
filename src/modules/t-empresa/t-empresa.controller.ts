@@ -47,4 +47,10 @@ export class TEmpresaController {
   async getPublicTEmpresa() {
     return this.tEmpresaService.getPublicTEmpresa();
   }
+
+  @Auth()
+  @Get('public/t-conceptos/:id')
+  async getPublicTEmpresaWithConceptos(@Param('id') id: number) {
+    return this.tEmpresaService.getPublicTEmpresaWithConceptos(id);
+  }
 }

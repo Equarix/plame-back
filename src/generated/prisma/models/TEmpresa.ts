@@ -218,6 +218,7 @@ export type TEmpresaWhereInput = {
   status?: Prisma.BoolFilter<"TEmpresa"> | boolean
   tpersonas?: Prisma.TPersonaListRelationFilter
   plameDeclaraciones?: Prisma.PlameDeclaracionListRelationFilter
+  tempresaConceptos?: Prisma.TEmpresaConceptosListRelationFilter
 }
 
 export type TEmpresaOrderByWithRelationInput = {
@@ -228,6 +229,7 @@ export type TEmpresaOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   tpersonas?: Prisma.TPersonaOrderByRelationAggregateInput
   plameDeclaraciones?: Prisma.PlameDeclaracionOrderByRelationAggregateInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosOrderByRelationAggregateInput
 }
 
 export type TEmpresaWhereUniqueInput = Prisma.AtLeast<{
@@ -241,6 +243,7 @@ export type TEmpresaWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.BoolFilter<"TEmpresa"> | boolean
   tpersonas?: Prisma.TPersonaListRelationFilter
   plameDeclaraciones?: Prisma.PlameDeclaracionListRelationFilter
+  tempresaConceptos?: Prisma.TEmpresaConceptosListRelationFilter
 }, "companyId">
 
 export type TEmpresaOrderByWithAggregationInput = {
@@ -274,6 +277,7 @@ export type TEmpresaCreateInput = {
   status?: boolean
   tpersonas?: Prisma.TPersonaCreateNestedManyWithoutTempresaInput
   plameDeclaraciones?: Prisma.PlameDeclaracionCreateNestedManyWithoutTempresaInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosCreateNestedManyWithoutTEmpresaInput
 }
 
 export type TEmpresaUncheckedCreateInput = {
@@ -284,6 +288,7 @@ export type TEmpresaUncheckedCreateInput = {
   status?: boolean
   tpersonas?: Prisma.TPersonaUncheckedCreateNestedManyWithoutTempresaInput
   plameDeclaraciones?: Prisma.PlameDeclaracionUncheckedCreateNestedManyWithoutTempresaInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUncheckedCreateNestedManyWithoutTEmpresaInput
 }
 
 export type TEmpresaUpdateInput = {
@@ -293,6 +298,7 @@ export type TEmpresaUpdateInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tpersonas?: Prisma.TPersonaUpdateManyWithoutTempresaNestedInput
   plameDeclaraciones?: Prisma.PlameDeclaracionUpdateManyWithoutTempresaNestedInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUpdateManyWithoutTEmpresaNestedInput
 }
 
 export type TEmpresaUncheckedUpdateInput = {
@@ -303,6 +309,7 @@ export type TEmpresaUncheckedUpdateInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tpersonas?: Prisma.TPersonaUncheckedUpdateManyWithoutTempresaNestedInput
   plameDeclaraciones?: Prisma.PlameDeclaracionUncheckedUpdateManyWithoutTempresaNestedInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUncheckedUpdateManyWithoutTEmpresaNestedInput
 }
 
 export type TEmpresaCreateManyInput = {
@@ -360,14 +367,28 @@ export type TEmpresaSumOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
 }
 
+export type TEmpresaScalarRelationFilter = {
+  is?: Prisma.TEmpresaWhereInput
+  isNot?: Prisma.TEmpresaWhereInput
+}
+
 export type TEmpresaNullableScalarRelationFilter = {
   is?: Prisma.TEmpresaWhereInput | null
   isNot?: Prisma.TEmpresaWhereInput | null
 }
 
-export type TEmpresaScalarRelationFilter = {
-  is?: Prisma.TEmpresaWhereInput
-  isNot?: Prisma.TEmpresaWhereInput
+export type TEmpresaCreateNestedOneWithoutTempresaConceptosInput = {
+  create?: Prisma.XOR<Prisma.TEmpresaCreateWithoutTempresaConceptosInput, Prisma.TEmpresaUncheckedCreateWithoutTempresaConceptosInput>
+  connectOrCreate?: Prisma.TEmpresaCreateOrConnectWithoutTempresaConceptosInput
+  connect?: Prisma.TEmpresaWhereUniqueInput
+}
+
+export type TEmpresaUpdateOneRequiredWithoutTempresaConceptosNestedInput = {
+  create?: Prisma.XOR<Prisma.TEmpresaCreateWithoutTempresaConceptosInput, Prisma.TEmpresaUncheckedCreateWithoutTempresaConceptosInput>
+  connectOrCreate?: Prisma.TEmpresaCreateOrConnectWithoutTempresaConceptosInput
+  upsert?: Prisma.TEmpresaUpsertWithoutTempresaConceptosInput
+  connect?: Prisma.TEmpresaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TEmpresaUpdateToOneWithWhereWithoutTempresaConceptosInput, Prisma.TEmpresaUpdateWithoutTempresaConceptosInput>, Prisma.TEmpresaUncheckedUpdateWithoutTempresaConceptosInput>
 }
 
 export type TEmpresaCreateNestedOneWithoutTpersonasInput = {
@@ -400,12 +421,67 @@ export type TEmpresaUpdateOneRequiredWithoutPlameDeclaracionesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TEmpresaUpdateToOneWithWhereWithoutPlameDeclaracionesInput, Prisma.TEmpresaUpdateWithoutPlameDeclaracionesInput>, Prisma.TEmpresaUncheckedUpdateWithoutPlameDeclaracionesInput>
 }
 
+export type TEmpresaCreateWithoutTempresaConceptosInput = {
+  name: string
+  ruc: string
+  address: string
+  status?: boolean
+  tpersonas?: Prisma.TPersonaCreateNestedManyWithoutTempresaInput
+  plameDeclaraciones?: Prisma.PlameDeclaracionCreateNestedManyWithoutTempresaInput
+}
+
+export type TEmpresaUncheckedCreateWithoutTempresaConceptosInput = {
+  companyId?: number
+  name: string
+  ruc: string
+  address: string
+  status?: boolean
+  tpersonas?: Prisma.TPersonaUncheckedCreateNestedManyWithoutTempresaInput
+  plameDeclaraciones?: Prisma.PlameDeclaracionUncheckedCreateNestedManyWithoutTempresaInput
+}
+
+export type TEmpresaCreateOrConnectWithoutTempresaConceptosInput = {
+  where: Prisma.TEmpresaWhereUniqueInput
+  create: Prisma.XOR<Prisma.TEmpresaCreateWithoutTempresaConceptosInput, Prisma.TEmpresaUncheckedCreateWithoutTempresaConceptosInput>
+}
+
+export type TEmpresaUpsertWithoutTempresaConceptosInput = {
+  update: Prisma.XOR<Prisma.TEmpresaUpdateWithoutTempresaConceptosInput, Prisma.TEmpresaUncheckedUpdateWithoutTempresaConceptosInput>
+  create: Prisma.XOR<Prisma.TEmpresaCreateWithoutTempresaConceptosInput, Prisma.TEmpresaUncheckedCreateWithoutTempresaConceptosInput>
+  where?: Prisma.TEmpresaWhereInput
+}
+
+export type TEmpresaUpdateToOneWithWhereWithoutTempresaConceptosInput = {
+  where?: Prisma.TEmpresaWhereInput
+  data: Prisma.XOR<Prisma.TEmpresaUpdateWithoutTempresaConceptosInput, Prisma.TEmpresaUncheckedUpdateWithoutTempresaConceptosInput>
+}
+
+export type TEmpresaUpdateWithoutTempresaConceptosInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ruc?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tpersonas?: Prisma.TPersonaUpdateManyWithoutTempresaNestedInput
+  plameDeclaraciones?: Prisma.PlameDeclaracionUpdateManyWithoutTempresaNestedInput
+}
+
+export type TEmpresaUncheckedUpdateWithoutTempresaConceptosInput = {
+  companyId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ruc?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tpersonas?: Prisma.TPersonaUncheckedUpdateManyWithoutTempresaNestedInput
+  plameDeclaraciones?: Prisma.PlameDeclaracionUncheckedUpdateManyWithoutTempresaNestedInput
+}
+
 export type TEmpresaCreateWithoutTpersonasInput = {
   name: string
   ruc: string
   address: string
   status?: boolean
   plameDeclaraciones?: Prisma.PlameDeclaracionCreateNestedManyWithoutTempresaInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosCreateNestedManyWithoutTEmpresaInput
 }
 
 export type TEmpresaUncheckedCreateWithoutTpersonasInput = {
@@ -415,6 +491,7 @@ export type TEmpresaUncheckedCreateWithoutTpersonasInput = {
   address: string
   status?: boolean
   plameDeclaraciones?: Prisma.PlameDeclaracionUncheckedCreateNestedManyWithoutTempresaInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUncheckedCreateNestedManyWithoutTEmpresaInput
 }
 
 export type TEmpresaCreateOrConnectWithoutTpersonasInput = {
@@ -439,6 +516,7 @@ export type TEmpresaUpdateWithoutTpersonasInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   plameDeclaraciones?: Prisma.PlameDeclaracionUpdateManyWithoutTempresaNestedInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUpdateManyWithoutTEmpresaNestedInput
 }
 
 export type TEmpresaUncheckedUpdateWithoutTpersonasInput = {
@@ -448,6 +526,7 @@ export type TEmpresaUncheckedUpdateWithoutTpersonasInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   plameDeclaraciones?: Prisma.PlameDeclaracionUncheckedUpdateManyWithoutTempresaNestedInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUncheckedUpdateManyWithoutTEmpresaNestedInput
 }
 
 export type TEmpresaCreateWithoutPlameDeclaracionesInput = {
@@ -456,6 +535,7 @@ export type TEmpresaCreateWithoutPlameDeclaracionesInput = {
   address: string
   status?: boolean
   tpersonas?: Prisma.TPersonaCreateNestedManyWithoutTempresaInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosCreateNestedManyWithoutTEmpresaInput
 }
 
 export type TEmpresaUncheckedCreateWithoutPlameDeclaracionesInput = {
@@ -465,6 +545,7 @@ export type TEmpresaUncheckedCreateWithoutPlameDeclaracionesInput = {
   address: string
   status?: boolean
   tpersonas?: Prisma.TPersonaUncheckedCreateNestedManyWithoutTempresaInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUncheckedCreateNestedManyWithoutTEmpresaInput
 }
 
 export type TEmpresaCreateOrConnectWithoutPlameDeclaracionesInput = {
@@ -489,6 +570,7 @@ export type TEmpresaUpdateWithoutPlameDeclaracionesInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tpersonas?: Prisma.TPersonaUpdateManyWithoutTempresaNestedInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUpdateManyWithoutTEmpresaNestedInput
 }
 
 export type TEmpresaUncheckedUpdateWithoutPlameDeclaracionesInput = {
@@ -498,6 +580,7 @@ export type TEmpresaUncheckedUpdateWithoutPlameDeclaracionesInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tpersonas?: Prisma.TPersonaUncheckedUpdateManyWithoutTempresaNestedInput
+  tempresaConceptos?: Prisma.TEmpresaConceptosUncheckedUpdateManyWithoutTEmpresaNestedInput
 }
 
 
@@ -508,11 +591,13 @@ export type TEmpresaUncheckedUpdateWithoutPlameDeclaracionesInput = {
 export type TEmpresaCountOutputType = {
   tpersonas: number
   plameDeclaraciones: number
+  tempresaConceptos: number
 }
 
 export type TEmpresaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tpersonas?: boolean | TEmpresaCountOutputTypeCountTpersonasArgs
   plameDeclaraciones?: boolean | TEmpresaCountOutputTypeCountPlameDeclaracionesArgs
+  tempresaConceptos?: boolean | TEmpresaCountOutputTypeCountTempresaConceptosArgs
 }
 
 /**
@@ -539,6 +624,13 @@ export type TEmpresaCountOutputTypeCountPlameDeclaracionesArgs<ExtArgs extends r
   where?: Prisma.PlameDeclaracionWhereInput
 }
 
+/**
+ * TEmpresaCountOutputType without action
+ */
+export type TEmpresaCountOutputTypeCountTempresaConceptosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TEmpresaConceptosWhereInput
+}
+
 
 export type TEmpresaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   companyId?: boolean
@@ -548,6 +640,7 @@ export type TEmpresaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   status?: boolean
   tpersonas?: boolean | Prisma.TEmpresa$tpersonasArgs<ExtArgs>
   plameDeclaraciones?: boolean | Prisma.TEmpresa$plameDeclaracionesArgs<ExtArgs>
+  tempresaConceptos?: boolean | Prisma.TEmpresa$tempresaConceptosArgs<ExtArgs>
   _count?: boolean | Prisma.TEmpresaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tEmpresa"]>
 
@@ -579,6 +672,7 @@ export type TEmpresaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type TEmpresaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tpersonas?: boolean | Prisma.TEmpresa$tpersonasArgs<ExtArgs>
   plameDeclaraciones?: boolean | Prisma.TEmpresa$plameDeclaracionesArgs<ExtArgs>
+  tempresaConceptos?: boolean | Prisma.TEmpresa$tempresaConceptosArgs<ExtArgs>
   _count?: boolean | Prisma.TEmpresaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TEmpresaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -589,6 +683,7 @@ export type $TEmpresaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     tpersonas: Prisma.$TPersonaPayload<ExtArgs>[]
     plameDeclaraciones: Prisma.$PlameDeclaracionPayload<ExtArgs>[]
+    tempresaConceptos: Prisma.$TEmpresaConceptosPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     companyId: number
@@ -992,6 +1087,7 @@ export interface Prisma__TEmpresaClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tpersonas<T extends Prisma.TEmpresa$tpersonasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TEmpresa$tpersonasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TPersonaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   plameDeclaraciones<T extends Prisma.TEmpresa$plameDeclaracionesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TEmpresa$plameDeclaracionesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlameDeclaracionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tempresaConceptos<T extends Prisma.TEmpresa$tempresaConceptosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TEmpresa$tempresaConceptosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TEmpresaConceptosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1462,6 +1558,30 @@ export type TEmpresa$plameDeclaracionesArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.PlameDeclaracionScalarFieldEnum | Prisma.PlameDeclaracionScalarFieldEnum[]
+}
+
+/**
+ * TEmpresa.tempresaConceptos
+ */
+export type TEmpresa$tempresaConceptosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TEmpresaConceptos
+   */
+  select?: Prisma.TEmpresaConceptosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TEmpresaConceptos
+   */
+  omit?: Prisma.TEmpresaConceptosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TEmpresaConceptosInclude<ExtArgs> | null
+  where?: Prisma.TEmpresaConceptosWhereInput
+  orderBy?: Prisma.TEmpresaConceptosOrderByWithRelationInput | Prisma.TEmpresaConceptosOrderByWithRelationInput[]
+  cursor?: Prisma.TEmpresaConceptosWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TEmpresaConceptosScalarFieldEnum | Prisma.TEmpresaConceptosScalarFieldEnum[]
 }
 
 /**

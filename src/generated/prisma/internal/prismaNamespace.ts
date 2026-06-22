@@ -386,6 +386,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   TEmpresa: 'TEmpresa',
+  TEmpresaConceptos: 'TEmpresaConceptos',
+  TConceptos: 'TConceptos',
   Ocupacion: 'Ocupacion',
   Entidades: 'Entidades',
   SituacionesEducativas: 'SituacionesEducativas',
@@ -417,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "tEmpresa" | "ocupacion" | "entidades" | "situacionesEducativas" | "persona" | "pais" | "departamento" | "provincia" | "distrito" | "direccion" | "tPersona" | "estudios" | "plameDeclaracion" | "plameDetallePersona" | "plameDetalleIngreso" | "plameDetalleDescuento" | "plameDetalleTributo"
+    modelProps: "user" | "tEmpresa" | "tEmpresaConceptos" | "tConceptos" | "ocupacion" | "entidades" | "situacionesEducativas" | "persona" | "pais" | "departamento" | "provincia" | "distrito" | "direccion" | "tPersona" | "estudios" | "plameDeclaracion" | "plameDetallePersona" | "plameDetalleIngreso" | "plameDetalleDescuento" | "plameDetalleTributo"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -566,6 +568,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TEmpresaCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TEmpresaCountAggregateOutputType> | number
+        }
+      }
+    }
+    TEmpresaConceptos: {
+      payload: Prisma.$TEmpresaConceptosPayload<ExtArgs>
+      fields: Prisma.TEmpresaConceptosFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TEmpresaConceptosFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TEmpresaConceptosFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>
+        }
+        findFirst: {
+          args: Prisma.TEmpresaConceptosFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TEmpresaConceptosFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>
+        }
+        findMany: {
+          args: Prisma.TEmpresaConceptosFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>[]
+        }
+        create: {
+          args: Prisma.TEmpresaConceptosCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>
+        }
+        createMany: {
+          args: Prisma.TEmpresaConceptosCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TEmpresaConceptosCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>[]
+        }
+        delete: {
+          args: Prisma.TEmpresaConceptosDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>
+        }
+        update: {
+          args: Prisma.TEmpresaConceptosUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>
+        }
+        deleteMany: {
+          args: Prisma.TEmpresaConceptosDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TEmpresaConceptosUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TEmpresaConceptosUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>[]
+        }
+        upsert: {
+          args: Prisma.TEmpresaConceptosUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TEmpresaConceptosPayload>
+        }
+        aggregate: {
+          args: Prisma.TEmpresaConceptosAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTEmpresaConceptos>
+        }
+        groupBy: {
+          args: Prisma.TEmpresaConceptosGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TEmpresaConceptosGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TEmpresaConceptosCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TEmpresaConceptosCountAggregateOutputType> | number
+        }
+      }
+    }
+    TConceptos: {
+      payload: Prisma.$TConceptosPayload<ExtArgs>
+      fields: Prisma.TConceptosFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TConceptosFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TConceptosFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>
+        }
+        findFirst: {
+          args: Prisma.TConceptosFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TConceptosFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>
+        }
+        findMany: {
+          args: Prisma.TConceptosFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>[]
+        }
+        create: {
+          args: Prisma.TConceptosCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>
+        }
+        createMany: {
+          args: Prisma.TConceptosCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TConceptosCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>[]
+        }
+        delete: {
+          args: Prisma.TConceptosDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>
+        }
+        update: {
+          args: Prisma.TConceptosUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>
+        }
+        deleteMany: {
+          args: Prisma.TConceptosDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TConceptosUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TConceptosUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>[]
+        }
+        upsert: {
+          args: Prisma.TConceptosUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TConceptosPayload>
+        }
+        aggregate: {
+          args: Prisma.TConceptosAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTConceptos>
+        }
+        groupBy: {
+          args: Prisma.TConceptosGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TConceptosGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TConceptosCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TConceptosCountAggregateOutputType> | number
         }
       }
     }
@@ -1813,6 +1963,29 @@ export const TEmpresaScalarFieldEnum = {
 export type TEmpresaScalarFieldEnum = (typeof TEmpresaScalarFieldEnum)[keyof typeof TEmpresaScalarFieldEnum]
 
 
+export const TEmpresaConceptosScalarFieldEnum = {
+  id: 'id',
+  tEmpresaCompanyId: 'tEmpresaCompanyId',
+  conceptoId: 'conceptoId'
+} as const
+
+export type TEmpresaConceptosScalarFieldEnum = (typeof TEmpresaConceptosScalarFieldEnum)[keyof typeof TEmpresaConceptosScalarFieldEnum]
+
+
+export const TConceptosScalarFieldEnum = {
+  conceptoId: 'conceptoId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  tipo: 'tipo',
+  subTipo: 'subTipo',
+  porcentaje: 'porcentaje',
+  estado: 'estado',
+  createdAt: 'createdAt'
+} as const
+
+export type TConceptosScalarFieldEnum = (typeof TConceptosScalarFieldEnum)[keyof typeof TConceptosScalarFieldEnum]
+
+
 export const OcupacionScalarFieldEnum = {
   ocupacionId: 'ocupacionId',
   name: 'name',
@@ -2121,6 +2294,27 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'TipoConcepto'
+ */
+export type EnumTipoConceptoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoConcepto'>
+    
+
+
+/**
+ * Reference to a field of type 'SubConcepto'
+ */
+export type EnumSubConceptoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubConcepto'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -2180,13 +2374,6 @@ export type EnumTipoPagoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
  * Reference to a field of type 'PeriodoIngreso'
  */
 export type EnumPeriodoIngresoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PeriodoIngreso'>
-    
-
-
-/**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
@@ -2350,6 +2537,8 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   tEmpresa?: Prisma.TEmpresaOmit
+  tEmpresaConceptos?: Prisma.TEmpresaConceptosOmit
+  tConceptos?: Prisma.TConceptosOmit
   ocupacion?: Prisma.OcupacionOmit
   entidades?: Prisma.EntidadesOmit
   situacionesEducativas?: Prisma.SituacionesEducativasOmit

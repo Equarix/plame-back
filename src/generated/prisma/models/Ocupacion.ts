@@ -336,10 +336,6 @@ export type OcupacionScalarRelationFilter = {
   isNot?: Prisma.OcupacionWhereInput
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type OcupacionCreateNestedOneWithoutTpersonasInput = {
   create?: Prisma.XOR<Prisma.OcupacionCreateWithoutTpersonasInput, Prisma.OcupacionUncheckedCreateWithoutTpersonasInput>
   connectOrCreate?: Prisma.OcupacionCreateOrConnectWithoutTpersonasInput

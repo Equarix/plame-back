@@ -9,9 +9,10 @@ import { PersonaModule } from './modules/persona/persona.module';
 import { TPersonaModule } from './modules/t-persona/t-persona.module';
 import { UbigeoModule } from './modules/ubigeo/ubigeo.module';
 import { PlameModule } from './modules/plame/plame.module';
+import { ConceptosModule } from './modules/conceptos/conceptos.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, TEmpresaModule, OcupacionModule, EntidadBancariaModule, SituacionesAcademicasModule, PersonaModule, TPersonaModule, UbigeoModule, PlameModule],
+  imports: [ConfigModule.forRoot(), AuthModule, TEmpresaModule, OcupacionModule, EntidadBancariaModule, SituacionesAcademicasModule, PersonaModule, TPersonaModule, UbigeoModule, PlameModule, ConceptosModule],
   controllers: [],
   providers: [],
 })
