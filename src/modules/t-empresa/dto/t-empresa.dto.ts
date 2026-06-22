@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { ArrayMinSize, IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class TEmpresaDto {
   @IsString()
@@ -12,4 +12,10 @@ export class TEmpresaDto {
   @IsString()
   @IsNotEmpty()
   address: string;
+
+
+  @IsArray()
+  @ArrayMinSize(1)
+  @IsNumber({}, { each: true })
+  conceptos: number[];
 }

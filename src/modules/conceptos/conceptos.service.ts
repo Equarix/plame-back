@@ -8,8 +8,13 @@ export class ConceptosService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createConceptoDto: CreateConceptoDto) {
+    const { subConcepto, ...rest } = createConceptoDto;
+
     return this.prisma.tConceptos.create({
-      data: createConceptoDto,
+      data: {
+        ...rest,
+        subTipo: subConcepto || null,
+      },
     });
   }
 
@@ -24,6 +29,8 @@ export class ConceptosService {
   }
 
   async update(id: number, updateConceptoDto: UpdateConceptoDto) {
+    const { subConcepto, ...rest } = updateConceptoDto;
+
     const find = await this.prisma.tConceptos.findUnique({
       where: { conceptoId: id },
     });
@@ -34,7 +41,10 @@ export class ConceptosService {
 
     return this.prisma.tConceptos.update({
       where: { conceptoId: id },
-      data: updateConceptoDto,
+      data: {
+        ...rest,
+        subTipo: subConcepto || null,
+      },
     });
   }
 

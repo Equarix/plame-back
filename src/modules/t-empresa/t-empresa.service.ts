@@ -35,16 +35,76 @@ export class TEmpresaService {
   }
 
   async createTEmpresa(data: TEmpresaDto) {
-    return this.prisma.tEmpresa.create({
-      data,
+    const { conceptos, ...empresaData } = data;
+
+    return this.prisma.$transaction(async (tx) => {
+      const newEmpresa = await tx.tEmpresa.create({
+        data: empresaData,
+      });
+
+      const findConceptos = await this.prisma.tConceptos.findMany({
+        where: {
+          conceptoId: {
+            in: conceptos,
+          },
+        },
+      });
+
+      if (findConceptos.length !== conceptos.length) {
+        throw new NotFoundException('Some concepts not found');
+      }
+
+      const newConceptos = await tx.tEmpresaConceptos.createMany({
+        data: conceptos.map((conceptoId) => ({
+          tEmpresaCompanyId: newEmpresa.companyId,
+          conceptoId,
+        })),
+      });
+
+      return { ...newEmpresa, conceptos: newConceptos };
     });
   }
 
   async updateTEmpresa(id: number, data: TEmpresaDto) {
-    return this.prisma.tEmpresa.update({
+    const { conceptos, ...empresaData } = data;
+
+    const company = await this.prisma.tEmpresa.findUnique({
       where: { companyId: id },
-      data,
     });
+
+    if (!company) {
+      throw new NotFoundException(`TEmpresa with ID ${id} not found`);
+    }
+
+    const findConceptos = await this.prisma.tConceptos.findMany({
+      where: {
+        conceptoId: {
+          in: conceptos,
+        },
+      },
+    });
+
+    if (findConceptos.length !== conceptos.length) {
+      throw new NotFoundException('Some concepts not found');
+    }
+
+    const updatedEmpresa = await this.prisma.tEmpresa.update({
+      where: { companyId: id },
+      data: empresaData,
+    });
+
+    await this.prisma.tEmpresaConceptos.deleteMany({
+      where: { tEmpresaCompanyId: id },
+    });
+
+    const newConceptos = await this.prisma.tEmpresaConceptos.createMany({
+      data: conceptos.map((conceptoId) => ({
+        tEmpresaCompanyId: id,
+        conceptoId,
+      })),
+    });
+
+    return { ...updatedEmpresa, conceptos: newConceptos };
   }
 
   async deleteTEmpresa(id: number) {
@@ -65,13 +125,22 @@ export class TEmpresaService {
   async getPublicTEmpresa() {
     return this.prisma.tEmpresa.findMany({
       where: { status: true },
-      include: {
-        tempresaConceptos: {
-          include: {
-            concepto: true,
-          },
-        },
-      },
     });
+  }
+
+  async getPublicTEmpresaWithConceptos(id: number) {
+    const empresa = await this.prisma.tEmpresa.findFirst({
+      where: { companyId: id, status: true },
+    });
+
+    if (!empresa) {
+      throw new NotFoundException('TEmpresa not found');
+    }
+    const conceptos = await this.prisma.tEmpresaConceptos.findMany({
+      where: { tEmpresaCompanyId: id },
+      include: { concepto: true },
+    });
+
+    return { ...empresa, conceptos };
   }
 }
