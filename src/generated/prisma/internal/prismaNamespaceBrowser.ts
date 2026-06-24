@@ -289,7 +289,8 @@ export const TPersonaScalarFieldEnum = {
   tEmpresaCompanyId: 'tEmpresaCompanyId',
   createAt: 'createAt',
   userId: 'userId',
-  fechaIngreso: 'fechaIngreso'
+  fechaIngreso: 'fechaIngreso',
+  categoriaOcupacional: 'categoriaOcupacional'
 } as const
 
 export type TPersonaScalarFieldEnum = (typeof TPersonaScalarFieldEnum)[keyof typeof TPersonaScalarFieldEnum]

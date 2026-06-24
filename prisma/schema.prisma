@@ -315,6 +315,7 @@ model TPersona {
   user                     User                  @relation(fields: [userId], references: [userId])
   fechaIngreso             DateTime
   plameDetalles            PlameDetallePersona[]
+  categoriaOcupacional     String?
 }
 
 enum Pensiones {

@@ -97,6 +97,7 @@ export type TPersonaMinAggregateOutputType = {
   createAt: Date | null
   userId: number | null
   fechaIngreso: Date | null
+  categoriaOcupacional: string | null
 }
 
 export type TPersonaMaxAggregateOutputType = {
@@ -148,6 +149,7 @@ export type TPersonaMaxAggregateOutputType = {
   createAt: Date | null
   userId: number | null
   fechaIngreso: Date | null
+  categoriaOcupacional: string | null
 }
 
 export type TPersonaCountAggregateOutputType = {
@@ -199,6 +201,7 @@ export type TPersonaCountAggregateOutputType = {
   createAt: number
   userId: number
   fechaIngreso: number
+  categoriaOcupacional: number
   _all: number
 }
 
@@ -274,6 +277,7 @@ export type TPersonaMinAggregateInputType = {
   createAt?: true
   userId?: true
   fechaIngreso?: true
+  categoriaOcupacional?: true
 }
 
 export type TPersonaMaxAggregateInputType = {
@@ -325,6 +329,7 @@ export type TPersonaMaxAggregateInputType = {
   createAt?: true
   userId?: true
   fechaIngreso?: true
+  categoriaOcupacional?: true
 }
 
 export type TPersonaCountAggregateInputType = {
@@ -376,6 +381,7 @@ export type TPersonaCountAggregateInputType = {
   createAt?: true
   userId?: true
   fechaIngreso?: true
+  categoriaOcupacional?: true
   _all?: true
 }
 
@@ -514,6 +520,7 @@ export type TPersonaGroupByOutputType = {
   createAt: Date
   userId: number
   fechaIngreso: Date
+  categoriaOcupacional: string | null
   _count: TPersonaCountAggregateOutputType | null
   _avg: TPersonaAvgAggregateOutputType | null
   _sum: TPersonaSumAggregateOutputType | null
@@ -588,6 +595,7 @@ export type TPersonaWhereInput = {
   createAt?: Prisma.DateTimeFilter<"TPersona"> | Date | string
   userId?: Prisma.IntFilter<"TPersona"> | number
   fechaIngreso?: Prisma.DateTimeFilter<"TPersona"> | Date | string
+  categoriaOcupacional?: Prisma.StringNullableFilter<"TPersona"> | string | null
   persona?: Prisma.XOR<Prisma.PersonaScalarRelationFilter, Prisma.PersonaWhereInput>
   ocupacion?: Prisma.XOR<Prisma.OcupacionScalarRelationFilter, Prisma.OcupacionWhereInput>
   entidad?: Prisma.XOR<Prisma.EntidadesNullableScalarRelationFilter, Prisma.EntidadesWhereInput> | null
@@ -647,6 +655,7 @@ export type TPersonaOrderByWithRelationInput = {
   createAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   fechaIngreso?: Prisma.SortOrder
+  categoriaOcupacional?: Prisma.SortOrderInput | Prisma.SortOrder
   persona?: Prisma.PersonaOrderByWithRelationInput
   ocupacion?: Prisma.OcupacionOrderByWithRelationInput
   entidad?: Prisma.EntidadesOrderByWithRelationInput
@@ -709,6 +718,7 @@ export type TPersonaWhereUniqueInput = Prisma.AtLeast<{
   createAt?: Prisma.DateTimeFilter<"TPersona"> | Date | string
   userId?: Prisma.IntFilter<"TPersona"> | number
   fechaIngreso?: Prisma.DateTimeFilter<"TPersona"> | Date | string
+  categoriaOcupacional?: Prisma.StringNullableFilter<"TPersona"> | string | null
   persona?: Prisma.XOR<Prisma.PersonaScalarRelationFilter, Prisma.PersonaWhereInput>
   ocupacion?: Prisma.XOR<Prisma.OcupacionScalarRelationFilter, Prisma.OcupacionWhereInput>
   entidad?: Prisma.XOR<Prisma.EntidadesNullableScalarRelationFilter, Prisma.EntidadesWhereInput> | null
@@ -768,6 +778,7 @@ export type TPersonaOrderByWithAggregationInput = {
   createAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   fechaIngreso?: Prisma.SortOrder
+  categoriaOcupacional?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TPersonaCountOrderByAggregateInput
   _avg?: Prisma.TPersonaAvgOrderByAggregateInput
   _max?: Prisma.TPersonaMaxOrderByAggregateInput
@@ -827,6 +838,7 @@ export type TPersonaScalarWhereWithAggregatesInput = {
   createAt?: Prisma.DateTimeWithAggregatesFilter<"TPersona"> | Date | string
   userId?: Prisma.IntWithAggregatesFilter<"TPersona"> | number
   fechaIngreso?: Prisma.DateTimeWithAggregatesFilter<"TPersona"> | Date | string
+  categoriaOcupacional?: Prisma.StringNullableWithAggregatesFilter<"TPersona"> | string | null
 }
 
 export type TPersonaCreateInput = {
@@ -871,6 +883,7 @@ export type TPersonaCreateInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   persona: Prisma.PersonaCreateNestedOneWithoutTpersonasInput
   ocupacion: Prisma.OcupacionCreateNestedOneWithoutTpersonasInput
   entidad?: Prisma.EntidadesCreateNestedOneWithoutTpersonasInput
@@ -930,6 +943,7 @@ export type TPersonaUncheckedCreateInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   estudios?: Prisma.EstudiosUncheckedCreateNestedManyWithoutTPersonaInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedCreateNestedManyWithoutTPersonaInput
 }
@@ -976,6 +990,7 @@ export type TPersonaUpdateInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   persona?: Prisma.PersonaUpdateOneRequiredWithoutTpersonasNestedInput
   ocupacion?: Prisma.OcupacionUpdateOneRequiredWithoutTpersonasNestedInput
   entidad?: Prisma.EntidadesUpdateOneWithoutTpersonasNestedInput
@@ -1035,6 +1050,7 @@ export type TPersonaUncheckedUpdateInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estudios?: Prisma.EstudiosUncheckedUpdateManyWithoutTPersonaNestedInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedUpdateManyWithoutTPersonaNestedInput
 }
@@ -1088,6 +1104,7 @@ export type TPersonaCreateManyInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
 }
 
 export type TPersonaUpdateManyMutationInput = {
@@ -1132,6 +1149,7 @@ export type TPersonaUpdateManyMutationInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TPersonaUncheckedUpdateManyInput = {
@@ -1183,6 +1201,7 @@ export type TPersonaUncheckedUpdateManyInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TPersonaListRelationFilter = {
@@ -1244,6 +1263,7 @@ export type TPersonaCountOrderByAggregateInput = {
   createAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   fechaIngreso?: Prisma.SortOrder
+  categoriaOcupacional?: Prisma.SortOrder
 }
 
 export type TPersonaAvgOrderByAggregateInput = {
@@ -1306,6 +1326,7 @@ export type TPersonaMaxOrderByAggregateInput = {
   createAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   fechaIngreso?: Prisma.SortOrder
+  categoriaOcupacional?: Prisma.SortOrder
 }
 
 export type TPersonaMinOrderByAggregateInput = {
@@ -1357,6 +1378,7 @@ export type TPersonaMinOrderByAggregateInput = {
   createAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   fechaIngreso?: Prisma.SortOrder
+  categoriaOcupacional?: Prisma.SortOrder
 }
 
 export type TPersonaSumOrderByAggregateInput = {
@@ -1753,6 +1775,7 @@ export type TPersonaCreateWithoutUserInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   persona: Prisma.PersonaCreateNestedOneWithoutTpersonasInput
   ocupacion: Prisma.OcupacionCreateNestedOneWithoutTpersonasInput
   entidad?: Prisma.EntidadesCreateNestedOneWithoutTpersonasInput
@@ -1810,6 +1833,7 @@ export type TPersonaUncheckedCreateWithoutUserInput = {
   tEmpresaCompanyId?: number | null
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   estudios?: Prisma.EstudiosUncheckedCreateNestedManyWithoutTPersonaInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedCreateNestedManyWithoutTPersonaInput
 }
@@ -1891,6 +1915,7 @@ export type TPersonaScalarWhereInput = {
   createAt?: Prisma.DateTimeFilter<"TPersona"> | Date | string
   userId?: Prisma.IntFilter<"TPersona"> | number
   fechaIngreso?: Prisma.DateTimeFilter<"TPersona"> | Date | string
+  categoriaOcupacional?: Prisma.StringNullableFilter<"TPersona"> | string | null
 }
 
 export type TPersonaCreateWithoutTempresaInput = {
@@ -1935,6 +1960,7 @@ export type TPersonaCreateWithoutTempresaInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   persona: Prisma.PersonaCreateNestedOneWithoutTpersonasInput
   ocupacion: Prisma.OcupacionCreateNestedOneWithoutTpersonasInput
   entidad?: Prisma.EntidadesCreateNestedOneWithoutTpersonasInput
@@ -1992,6 +2018,7 @@ export type TPersonaUncheckedCreateWithoutTempresaInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   estudios?: Prisma.EstudiosUncheckedCreateNestedManyWithoutTPersonaInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedCreateNestedManyWithoutTPersonaInput
 }
@@ -2063,6 +2090,7 @@ export type TPersonaCreateWithoutOcupacionInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   persona: Prisma.PersonaCreateNestedOneWithoutTpersonasInput
   entidad?: Prisma.EntidadesCreateNestedOneWithoutTpersonasInput
   situacionEducativa: Prisma.SituacionesEducativasCreateNestedOneWithoutTpersonasInput
@@ -2120,6 +2148,7 @@ export type TPersonaUncheckedCreateWithoutOcupacionInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   estudios?: Prisma.EstudiosUncheckedCreateNestedManyWithoutTPersonaInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedCreateNestedManyWithoutTPersonaInput
 }
@@ -2191,6 +2220,7 @@ export type TPersonaCreateWithoutEntidadInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   persona: Prisma.PersonaCreateNestedOneWithoutTpersonasInput
   ocupacion: Prisma.OcupacionCreateNestedOneWithoutTpersonasInput
   situacionEducativa: Prisma.SituacionesEducativasCreateNestedOneWithoutTpersonasInput
@@ -2248,6 +2278,7 @@ export type TPersonaUncheckedCreateWithoutEntidadInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   estudios?: Prisma.EstudiosUncheckedCreateNestedManyWithoutTPersonaInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedCreateNestedManyWithoutTPersonaInput
 }
@@ -2319,6 +2350,7 @@ export type TPersonaCreateWithoutSituacionEducativaInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   persona: Prisma.PersonaCreateNestedOneWithoutTpersonasInput
   ocupacion: Prisma.OcupacionCreateNestedOneWithoutTpersonasInput
   entidad?: Prisma.EntidadesCreateNestedOneWithoutTpersonasInput
@@ -2376,6 +2408,7 @@ export type TPersonaUncheckedCreateWithoutSituacionEducativaInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   estudios?: Prisma.EstudiosUncheckedCreateNestedManyWithoutTPersonaInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedCreateNestedManyWithoutTPersonaInput
 }
@@ -2447,6 +2480,7 @@ export type TPersonaCreateWithoutPersonaInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   ocupacion: Prisma.OcupacionCreateNestedOneWithoutTpersonasInput
   entidad?: Prisma.EntidadesCreateNestedOneWithoutTpersonasInput
   situacionEducativa: Prisma.SituacionesEducativasCreateNestedOneWithoutTpersonasInput
@@ -2504,6 +2538,7 @@ export type TPersonaUncheckedCreateWithoutPersonaInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   estudios?: Prisma.EstudiosUncheckedCreateNestedManyWithoutTPersonaInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedCreateNestedManyWithoutTPersonaInput
 }
@@ -2575,6 +2610,7 @@ export type TPersonaCreateWithoutEstudiosInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   persona: Prisma.PersonaCreateNestedOneWithoutTpersonasInput
   ocupacion: Prisma.OcupacionCreateNestedOneWithoutTpersonasInput
   entidad?: Prisma.EntidadesCreateNestedOneWithoutTpersonasInput
@@ -2633,6 +2669,7 @@ export type TPersonaUncheckedCreateWithoutEstudiosInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedCreateNestedManyWithoutTPersonaInput
 }
 
@@ -2694,6 +2731,7 @@ export type TPersonaUpdateWithoutEstudiosInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   persona?: Prisma.PersonaUpdateOneRequiredWithoutTpersonasNestedInput
   ocupacion?: Prisma.OcupacionUpdateOneRequiredWithoutTpersonasNestedInput
   entidad?: Prisma.EntidadesUpdateOneWithoutTpersonasNestedInput
@@ -2752,6 +2790,7 @@ export type TPersonaUncheckedUpdateWithoutEstudiosInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedUpdateManyWithoutTPersonaNestedInput
 }
 
@@ -2797,6 +2836,7 @@ export type TPersonaCreateWithoutPlameDetallesInput = {
   evitaDobleImposicion?: boolean
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   persona: Prisma.PersonaCreateNestedOneWithoutTpersonasInput
   ocupacion: Prisma.OcupacionCreateNestedOneWithoutTpersonasInput
   entidad?: Prisma.EntidadesCreateNestedOneWithoutTpersonasInput
@@ -2855,6 +2895,7 @@ export type TPersonaUncheckedCreateWithoutPlameDetallesInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
   estudios?: Prisma.EstudiosUncheckedCreateNestedManyWithoutTPersonaInput
 }
 
@@ -2916,6 +2957,7 @@ export type TPersonaUpdateWithoutPlameDetallesInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   persona?: Prisma.PersonaUpdateOneRequiredWithoutTpersonasNestedInput
   ocupacion?: Prisma.OcupacionUpdateOneRequiredWithoutTpersonasNestedInput
   entidad?: Prisma.EntidadesUpdateOneWithoutTpersonasNestedInput
@@ -2974,6 +3016,7 @@ export type TPersonaUncheckedUpdateWithoutPlameDetallesInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estudios?: Prisma.EstudiosUncheckedUpdateManyWithoutTPersonaNestedInput
 }
 
@@ -3025,6 +3068,7 @@ export type TPersonaCreateManyUserInput = {
   tEmpresaCompanyId?: number | null
   createAt?: Date | string
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
 }
 
 export type TPersonaUpdateWithoutUserInput = {
@@ -3069,6 +3113,7 @@ export type TPersonaUpdateWithoutUserInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   persona?: Prisma.PersonaUpdateOneRequiredWithoutTpersonasNestedInput
   ocupacion?: Prisma.OcupacionUpdateOneRequiredWithoutTpersonasNestedInput
   entidad?: Prisma.EntidadesUpdateOneWithoutTpersonasNestedInput
@@ -3126,6 +3171,7 @@ export type TPersonaUncheckedUpdateWithoutUserInput = {
   tEmpresaCompanyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estudios?: Prisma.EstudiosUncheckedUpdateManyWithoutTPersonaNestedInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedUpdateManyWithoutTPersonaNestedInput
 }
@@ -3178,6 +3224,7 @@ export type TPersonaUncheckedUpdateManyWithoutUserInput = {
   tEmpresaCompanyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TPersonaCreateManyTempresaInput = {
@@ -3228,6 +3275,7 @@ export type TPersonaCreateManyTempresaInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
 }
 
 export type TPersonaUpdateWithoutTempresaInput = {
@@ -3272,6 +3320,7 @@ export type TPersonaUpdateWithoutTempresaInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   persona?: Prisma.PersonaUpdateOneRequiredWithoutTpersonasNestedInput
   ocupacion?: Prisma.OcupacionUpdateOneRequiredWithoutTpersonasNestedInput
   entidad?: Prisma.EntidadesUpdateOneWithoutTpersonasNestedInput
@@ -3329,6 +3378,7 @@ export type TPersonaUncheckedUpdateWithoutTempresaInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estudios?: Prisma.EstudiosUncheckedUpdateManyWithoutTPersonaNestedInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedUpdateManyWithoutTPersonaNestedInput
 }
@@ -3381,6 +3431,7 @@ export type TPersonaUncheckedUpdateManyWithoutTempresaInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TPersonaCreateManyOcupacionInput = {
@@ -3431,6 +3482,7 @@ export type TPersonaCreateManyOcupacionInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
 }
 
 export type TPersonaUpdateWithoutOcupacionInput = {
@@ -3475,6 +3527,7 @@ export type TPersonaUpdateWithoutOcupacionInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   persona?: Prisma.PersonaUpdateOneRequiredWithoutTpersonasNestedInput
   entidad?: Prisma.EntidadesUpdateOneWithoutTpersonasNestedInput
   situacionEducativa?: Prisma.SituacionesEducativasUpdateOneRequiredWithoutTpersonasNestedInput
@@ -3532,6 +3585,7 @@ export type TPersonaUncheckedUpdateWithoutOcupacionInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estudios?: Prisma.EstudiosUncheckedUpdateManyWithoutTPersonaNestedInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedUpdateManyWithoutTPersonaNestedInput
 }
@@ -3584,6 +3638,7 @@ export type TPersonaUncheckedUpdateManyWithoutOcupacionInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TPersonaCreateManyEntidadInput = {
@@ -3634,6 +3689,7 @@ export type TPersonaCreateManyEntidadInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
 }
 
 export type TPersonaUpdateWithoutEntidadInput = {
@@ -3678,6 +3734,7 @@ export type TPersonaUpdateWithoutEntidadInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   persona?: Prisma.PersonaUpdateOneRequiredWithoutTpersonasNestedInput
   ocupacion?: Prisma.OcupacionUpdateOneRequiredWithoutTpersonasNestedInput
   situacionEducativa?: Prisma.SituacionesEducativasUpdateOneRequiredWithoutTpersonasNestedInput
@@ -3735,6 +3792,7 @@ export type TPersonaUncheckedUpdateWithoutEntidadInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estudios?: Prisma.EstudiosUncheckedUpdateManyWithoutTPersonaNestedInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedUpdateManyWithoutTPersonaNestedInput
 }
@@ -3787,6 +3845,7 @@ export type TPersonaUncheckedUpdateManyWithoutEntidadInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TPersonaCreateManySituacionEducativaInput = {
@@ -3837,6 +3896,7 @@ export type TPersonaCreateManySituacionEducativaInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
 }
 
 export type TPersonaUpdateWithoutSituacionEducativaInput = {
@@ -3881,6 +3941,7 @@ export type TPersonaUpdateWithoutSituacionEducativaInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   persona?: Prisma.PersonaUpdateOneRequiredWithoutTpersonasNestedInput
   ocupacion?: Prisma.OcupacionUpdateOneRequiredWithoutTpersonasNestedInput
   entidad?: Prisma.EntidadesUpdateOneWithoutTpersonasNestedInput
@@ -3938,6 +3999,7 @@ export type TPersonaUncheckedUpdateWithoutSituacionEducativaInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estudios?: Prisma.EstudiosUncheckedUpdateManyWithoutTPersonaNestedInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedUpdateManyWithoutTPersonaNestedInput
 }
@@ -3990,6 +4052,7 @@ export type TPersonaUncheckedUpdateManyWithoutSituacionEducativaInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TPersonaCreateManyPersonaInput = {
@@ -4040,6 +4103,7 @@ export type TPersonaCreateManyPersonaInput = {
   createAt?: Date | string
   userId: number
   fechaIngreso: Date | string
+  categoriaOcupacional?: string | null
 }
 
 export type TPersonaUpdateWithoutPersonaInput = {
@@ -4084,6 +4148,7 @@ export type TPersonaUpdateWithoutPersonaInput = {
   evitaDobleImposicion?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ocupacion?: Prisma.OcupacionUpdateOneRequiredWithoutTpersonasNestedInput
   entidad?: Prisma.EntidadesUpdateOneWithoutTpersonasNestedInput
   situacionEducativa?: Prisma.SituacionesEducativasUpdateOneRequiredWithoutTpersonasNestedInput
@@ -4141,6 +4206,7 @@ export type TPersonaUncheckedUpdateWithoutPersonaInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estudios?: Prisma.EstudiosUncheckedUpdateManyWithoutTPersonaNestedInput
   plameDetalles?: Prisma.PlameDetallePersonaUncheckedUpdateManyWithoutTPersonaNestedInput
 }
@@ -4193,6 +4259,7 @@ export type TPersonaUncheckedUpdateManyWithoutPersonaInput = {
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   fechaIngreso?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  categoriaOcupacional?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -4284,6 +4351,7 @@ export type TPersonaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createAt?: boolean
   userId?: boolean
   fechaIngreso?: boolean
+  categoriaOcupacional?: boolean
   persona?: boolean | Prisma.PersonaDefaultArgs<ExtArgs>
   ocupacion?: boolean | Prisma.OcupacionDefaultArgs<ExtArgs>
   entidad?: boolean | Prisma.TPersona$entidadArgs<ExtArgs>
@@ -4344,6 +4412,7 @@ export type TPersonaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   createAt?: boolean
   userId?: boolean
   fechaIngreso?: boolean
+  categoriaOcupacional?: boolean
   persona?: boolean | Prisma.PersonaDefaultArgs<ExtArgs>
   ocupacion?: boolean | Prisma.OcupacionDefaultArgs<ExtArgs>
   entidad?: boolean | Prisma.TPersona$entidadArgs<ExtArgs>
@@ -4401,6 +4470,7 @@ export type TPersonaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   createAt?: boolean
   userId?: boolean
   fechaIngreso?: boolean
+  categoriaOcupacional?: boolean
   persona?: boolean | Prisma.PersonaDefaultArgs<ExtArgs>
   ocupacion?: boolean | Prisma.OcupacionDefaultArgs<ExtArgs>
   entidad?: boolean | Prisma.TPersona$entidadArgs<ExtArgs>
@@ -4458,9 +4528,10 @@ export type TPersonaSelectScalar = {
   createAt?: boolean
   userId?: boolean
   fechaIngreso?: boolean
+  categoriaOcupacional?: boolean
 }
 
-export type TPersonaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"tPersonaId" | "personaId" | "categoria" | "telefono" | "email" | "periodoInicio" | "periodoFin" | "motivoBaja" | "tipoTrabajador" | "fechaInicio" | "motivoBajaTrabajador" | "regimenLaboral" | "otroRegimenLaboral" | "ocupacionId" | "tipoContrato" | "otroTipoContrato" | "tipoPago" | "otroTipoPago" | "periodoIngreso" | "otroPeriodoIngreso" | "entidadId" | "cuentaBancaria" | "montoRemuneracionInicial" | "codlocal" | "local" | "jornadaLaboral" | "situacionEspecial" | "discapacidad" | "sindicalizado" | "regimenSalud" | "fechaInicioSalud" | "fechaFinSalud" | "regimenPensionario" | "fechaInicioPensionario" | "fechaFinPensionario" | "CUSPP" | "sctr" | "pension" | "salud" | "fechaInicioSaludPension" | "fechaFinSaludPension" | "situacionEducativaId" | "quintaCategoriaExonerada" | "evitaDobleImposicion" | "tEmpresaCompanyId" | "createAt" | "userId" | "fechaIngreso", ExtArgs["result"]["tPersona"]>
+export type TPersonaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"tPersonaId" | "personaId" | "categoria" | "telefono" | "email" | "periodoInicio" | "periodoFin" | "motivoBaja" | "tipoTrabajador" | "fechaInicio" | "motivoBajaTrabajador" | "regimenLaboral" | "otroRegimenLaboral" | "ocupacionId" | "tipoContrato" | "otroTipoContrato" | "tipoPago" | "otroTipoPago" | "periodoIngreso" | "otroPeriodoIngreso" | "entidadId" | "cuentaBancaria" | "montoRemuneracionInicial" | "codlocal" | "local" | "jornadaLaboral" | "situacionEspecial" | "discapacidad" | "sindicalizado" | "regimenSalud" | "fechaInicioSalud" | "fechaFinSalud" | "regimenPensionario" | "fechaInicioPensionario" | "fechaFinPensionario" | "CUSPP" | "sctr" | "pension" | "salud" | "fechaInicioSaludPension" | "fechaFinSaludPension" | "situacionEducativaId" | "quintaCategoriaExonerada" | "evitaDobleImposicion" | "tEmpresaCompanyId" | "createAt" | "userId" | "fechaIngreso" | "categoriaOcupacional", ExtArgs["result"]["tPersona"]>
 export type TPersonaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   persona?: boolean | Prisma.PersonaDefaultArgs<ExtArgs>
   ocupacion?: boolean | Prisma.OcupacionDefaultArgs<ExtArgs>
@@ -4550,6 +4621,7 @@ export type $TPersonaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     createAt: Date
     userId: number
     fechaIngreso: Date
+    categoriaOcupacional: string | null
   }, ExtArgs["result"]["tPersona"]>
   composites: {}
 }
@@ -5029,6 +5101,7 @@ export interface TPersonaFieldRefs {
   readonly createAt: Prisma.FieldRef<"TPersona", 'DateTime'>
   readonly userId: Prisma.FieldRef<"TPersona", 'Int'>
   readonly fechaIngreso: Prisma.FieldRef<"TPersona", 'DateTime'>
+  readonly categoriaOcupacional: Prisma.FieldRef<"TPersona", 'String'>
 }
     
 

@@ -243,4 +243,8 @@ export class CreateTPersonaDto {
   @IsOptional()
   @Type(() => Date)
   fechaFinSaludPension?: Date;
+
+  @IsString()
+  @IsOptional()
+  categoriaOcupacional?: string;
 }
